@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 mousePosition;
     float deltaAccleration = 0;
 
-    public GameObject gameObject;
+    public GameObject camPivot;
 
     void Start()
     {
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         yAcceleration = Mathf.Abs(yAcceleration);
         deltaAccleration = yAcceleration - deltaAccleration;
 
-        Debug.Log(characterCamera.fieldOfView);
+        //Debug.Log(characterCamera.fieldOfView);
         if (deltaAccleration<=0)
         {
             characterCamera.fieldOfView -= 0.05f;
@@ -78,11 +79,11 @@ public class PlayerMovement : MonoBehaviour
         //Temp
         if (Input.GetKey(KeyCode.E))
         {
-            characterCamera.transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
+            camPivot.transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            characterCamera.transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
+            camPivot.transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
         }
         /*if (Input.GetMouseButtonDown(0))
         {
@@ -195,27 +196,38 @@ public class PlayerMovement : MonoBehaviour
 
         //Update position
         //transform.position += new Vector3(vel.x,vel.y,vel.z)* playerSpeed* Time.deltaTime;
-        vel += input.z * visObject.transform.forward; vel += input.y * visObject.transform.right;
 
         //Set animator floats
         anim.SetFloat("HorizSpeed", input.magnitude);
         anim.SetFloat("VertSpeed", rb.velocity.y);
 
+
+        Vector3 finalVel = Vector3.zero;
+
+        finalVel += camPivot.transform.forward * vel.z;
+        finalVel += camPivot.transform.right * vel.x;
+        finalVel += camPivot.transform.up * vel.y;
+
+
         //If moving, update rotation angle
         if (input.magnitude != 0.0f)
         {
-            float vertRot = Mathf.Atan2(movementX, movementZ);
+            float vertRot = Mathf.Atan2(finalVel.x, finalVel.z);
 
-            visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
-                Mathf.LerpAngle(visObject.transform.eulerAngles.y, Mathf.Rad2Deg * vertRot, Time.deltaTime * 15f)
-                , visObject.transform.eulerAngles.z);
+        visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
+            Mathf.LerpAngle(visObject.transform.eulerAngles.y, Mathf.Rad2Deg * vertRot, Time.deltaTime * 15f)
+            , visObject.transform.eulerAngles.z);
+
+        //visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
+        //        camPivot.transform.eulerAngles.y,
+        //         visObject.transform.eulerAngles.z) ;
         }
-        //.transform.RotateAround(transform.position,Vector3.up,);
-        gameObject.transform.position = transform.position;
-        gameObject.transform.rotation = visObject.transform.rotation;
-        visObject.transform.forward = gameObject.transform.forward;
-        
-        transform.position += visObject.transform.InverseTransformDirection(vel)*Time.deltaTime*playerSpeed;
+
+      
+        print(finalVel);
+        camPivot.transform.position = transform.position;
+        transform.position += finalVel * Time.deltaTime * playerSpeed;
+
         //Check if grounded
         if (rb.velocity.y == 0.0f)
         {
