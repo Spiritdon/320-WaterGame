@@ -34,8 +34,14 @@ public class PlayerMovement : MonoBehaviour
     //Animation Properties
     public Animator anim;
     public GameObject visObject;
-  
-    
+
+    //Camera
+    public Camera characterCamera;
+    Vector3 mousePosition;
+    float deltaAccleration = 0;
+
+    public GameObject gameObject;
+
     void Start()
     {
         extraJumpCounter = 1;
@@ -44,6 +50,57 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         //transform.position = new Vector3(10,3,10);
+    }
+    private void CameraControls()
+    {
+        float minFOV = 40f;
+        float maxFOV = 80f;
+        float FOVmultiplier = 20;
+
+        float yAcceleration = rb.velocity.y * Time.deltaTime;
+        yAcceleration = Mathf.Abs(yAcceleration);
+        deltaAccleration = yAcceleration - deltaAccleration;
+
+        Debug.Log(characterCamera.fieldOfView);
+        if (deltaAccleration<=0)
+        {
+            characterCamera.fieldOfView -= 0.05f;
+        }
+        else
+        {
+            characterCamera.fieldOfView += yAcceleration * FOVmultiplier;
+        }
+
+        characterCamera.fieldOfView = Mathf.Clamp(characterCamera.fieldOfView, minFOV, maxFOV);
+        Debug.Log(characterCamera.fieldOfView);
+
+
+        //Temp
+        if (Input.GetKey(KeyCode.E))
+        {
+            characterCamera.transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            characterCamera.transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
+        }
+        /*if (Input.GetMouseButtonDown(0))
+        {
+            lastMousePositionX = Input.mousePosition.x;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            deltaMousePosition = Input.mousePosition.x - lastMousePositionX;
+        }*/
+
+    }
+    private bool IsFalling()
+    {
+        if (rb.velocity.y < 0)
+        {
+            return true;
+        }
+        return false;
     }
     private bool IsGrounded()//checks if the player is touching the ground via raycasting
     {
@@ -64,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        CameraControls();
         //basic player movement
         movementX = Input.GetAxis("Horizontal");
         movementZ = Input.GetAxis("Vertical");
@@ -136,7 +194,8 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Update position
-        transform.position += new Vector3(vel.x,vel.y,vel.z)* playerSpeed* Time.deltaTime;
+        //transform.position += new Vector3(vel.x,vel.y,vel.z)* playerSpeed* Time.deltaTime;
+        vel += input.z * visObject.transform.forward; vel += input.y * visObject.transform.right;
 
         //Set animator floats
         anim.SetFloat("HorizSpeed", input.magnitude);
@@ -151,10 +210,14 @@ public class PlayerMovement : MonoBehaviour
                 Mathf.LerpAngle(visObject.transform.eulerAngles.y, Mathf.Rad2Deg * vertRot, Time.deltaTime * 15f)
                 , visObject.transform.eulerAngles.z);
         }
-
-
+        //.transform.RotateAround(transform.position,Vector3.up,);
+        gameObject.transform.position = transform.position;
+        gameObject.transform.rotation = visObject.transform.rotation;
+        visObject.transform.forward = gameObject.transform.forward;
+        
+        transform.position += visObject.transform.InverseTransformDirection(vel)*Time.deltaTime*playerSpeed;
         //Check if grounded
-        if(rb.velocity.y == 0.0f)
+        if (rb.velocity.y == 0.0f)
         {
             anim.SetBool("Grounded", true);
         }
