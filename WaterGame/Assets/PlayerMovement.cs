@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     public Camera characterCamera;
     Vector3 mousePosition;
     float deltaAccleration = 0;
+    float fallTimer = 2.0f;
 
     public GameObject camPivot;
 
@@ -61,9 +62,11 @@ public class PlayerMovement : MonoBehaviour
         float yAcceleration = rb.velocity.y * Time.deltaTime;
         yAcceleration = Mathf.Abs(yAcceleration);
         deltaAccleration = yAcceleration - deltaAccleration;
-
-        //Debug.Log(characterCamera.fieldOfView);
-        if (deltaAccleration<=0)
+        if (IsGrounded())
+        {
+            characterCamera.fieldOfView -= 0.05f;
+        }
+        if (deltaAccleration<=0 && fallTimer<=0)
         {
             characterCamera.fieldOfView -= 0.05f;
         }
@@ -73,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         characterCamera.fieldOfView = Mathf.Clamp(characterCamera.fieldOfView, minFOV, maxFOV);
-        Debug.Log(characterCamera.fieldOfView);
 
 
         //Temp
@@ -97,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool IsFalling()
     {
+        
         if (rb.velocity.y < 0)
         {
             return true;
@@ -106,10 +109,12 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()//checks if the player is touching the ground via raycasting
     {
         float distanceToGround = collider.bounds.extents.y;
+        fallTimer = 2.0f;
         return Physics.Raycast(transform.position, -Vector3.up,distanceToGround +0.1f);
         ///for this to return true their must be a intercetion between the ray and the ground 
         ///because the box collider can prevent a intercection(distance can be zero and is therefore not interceting)
-        ///so the +.1f ensures when the player lands their is a intercetion   
+        ///so the +.1f ensures when the player lands their is a intercetion  
+        
     }
     // Update is called once per frame
 
@@ -122,6 +127,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if (IsFalling())
+        {
+            fallTimer -= Time.deltaTime*900;
+        }
+        print(fallTimer);
         CameraControls();
         //basic player movement
         movementX = Input.GetAxis("Horizontal");
