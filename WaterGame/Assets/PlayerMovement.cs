@@ -224,17 +224,16 @@ public class PlayerMovement : MonoBehaviour
         {
             float vertRot = Mathf.Atan2(finalVel.x, finalVel.z);
 
-        visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
+           visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
             Mathf.LerpAngle(visObject.transform.eulerAngles.y, Mathf.Rad2Deg * vertRot, Time.deltaTime * 15f)
             , visObject.transform.eulerAngles.z);
 
-        //visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
-        //        camPivot.transform.eulerAngles.y,
-        //         visObject.transform.eulerAngles.z) ;
+            //visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
+            //        camPivot.transform.eulerAngles.y,
+            //         visObject.transform.eulerAngles.z) ;
         }
 
-      
-        print(finalVel);
+
         camPivot.transform.position = transform.position;
         transform.position += finalVel * Time.deltaTime * playerSpeed;
 
