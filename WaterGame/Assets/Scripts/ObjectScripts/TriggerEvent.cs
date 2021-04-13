@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum TriggerState { Enter,Exit,Stay}
 public class TriggerEvent : MonoBehaviour
 {
-    public delegate void Trigger(bool enter, Collider other);
+    public delegate void Trigger(TriggerState triggerState, Collider other);
     public Trigger triggerEvent;
 
 
 
     private void OnTriggerEnter(Collider other)
     {
-        triggerEvent?.Invoke(true, other);
+        triggerEvent?.Invoke(TriggerState.Enter, other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        triggerEvent?.Invoke(false, other);
+        triggerEvent?.Invoke(TriggerState.Exit, other);
     }
 
     private void OnTriggerStay(Collider other)
@@ -24,7 +26,7 @@ public class TriggerEvent : MonoBehaviour
         //Limit to player interaction
         if(other.CompareTag("Player"))
         {
-            triggerEvent?.Invoke(true, other);
+            triggerEvent?.Invoke(TriggerState.Stay, other);
         }
        
     }

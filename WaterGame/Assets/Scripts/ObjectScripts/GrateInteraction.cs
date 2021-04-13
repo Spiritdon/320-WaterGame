@@ -19,9 +19,10 @@ public class GrateInteraction : MonoBehaviour
     }
 
     //Unity's component system is wack, cant use ontriggerEnter from other collider object :,(
-    void TriggeredEvent(bool entered,Collider other)
+    void TriggeredEvent(TriggerState triggerState,Collider other)
     {
-        if (entered)
+        //Enter or stay
+        if (triggerState != TriggerState.Exit)
         {
             if (other.gameObject.CompareTag("Player"))
             {
