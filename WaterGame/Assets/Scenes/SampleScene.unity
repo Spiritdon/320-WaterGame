@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b408014297e8b14596537523ac9f8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   anim: {fileID: 1572934776}
   visObject: {fileID: 1572934775}
 --- !u!54 &314044337
@@ -375,7 +374,7 @@ GameObject:
   - component: {fileID: 624854021}
   - component: {fileID: 624854020}
   - component: {fileID: 624854019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
