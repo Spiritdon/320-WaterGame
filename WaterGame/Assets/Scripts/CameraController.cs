@@ -78,20 +78,22 @@ public class CameraController : MonoBehaviour
     }
     private void RotateCamera()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         float offSet = 0;
-        float offSetSensitivity = 10;
+        float offSetSensitivity = 1000;
         if (Input.GetMouseButtonDown(0))
         {
-            lastMousePosition = Input.mousePosition.x;
+            lastMousePosition = Input.GetAxis("Mouse X");
         }
         if (Input.GetMouseButton(0))
         {
-            offSet = Input.mousePosition.x - lastMousePosition;
+            offSet = Input.GetAxis("Mouse X") - lastMousePosition;
         }
-        offSet = offSet / offSetSensitivity;
+        offSet = offSet*offSetSensitivity;
         float absOffSet = Mathf.Abs(offSet);
 
-        if (absOffSet<=30 && offSet > 0)
+        /*if (absOffSet<=30 && offSet > 0)
         {
             transform.RotateAround(transform.position, Vector3.up, 30 * Time.deltaTime);
         }
@@ -107,25 +109,25 @@ public class CameraController : MonoBehaviour
         if (absOffSet <= 50 && absOffSet > 30 && offSet < 0)
         {
             transform.RotateAround(transform.position, Vector3.up, -60 * Time.deltaTime);
-        }
+        }*/
         if (Input.GetKeyDown(KeyCode.R))//resets camera
         {
             transform.rotation = defaultRotation;
             transform.position = defaultCamera;
         }
 
-        /*if (offSet>0)
+        if (offSet>0)
         {
-            transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
+            transform.RotateAround(transform.position, Vector3.up, 60 * Time.deltaTime);
         }
         else if (offSet<0)
         {
-            transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
+            transform.RotateAround(transform.position, Vector3.up, -60 * Time.deltaTime);
         }
         else
         {
 
-        }*/
+        }
         //offSet = offSet / offSetSensitivity;
         //characterCamera.transform.RotateAround(transform.position,Vector3.up,offSet); seems to break the player movement
         Debug.Log(offSet);
