@@ -22,7 +22,11 @@ public class trampInteraction : MonoBehaviour
         {
             Rigidbody playerRB = collision.other.GetComponent<Rigidbody>();
             tramForce += Mathf.Abs(playerRB.velocity.y);
-            print(playerRB.velocity.y);
+            print(tramForce);
+            if (tramForce>=30)
+            {
+                tramForce = 30;
+            }
             playerRB.AddForce(Vector3.up * tramForce, ForceMode.Impulse);
         }
     }
