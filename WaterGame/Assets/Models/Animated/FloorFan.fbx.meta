@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: ac7d9265fcfb1a64d90bec2f6ad46172
+guid: a63010a7bd85f7e4d9e20635e2563c25
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: 7573170671159085162
+      74: -4548006183852777992
     second: Stop
   - first:
-      74: 7492266843684834821
+      74: 3906920772057761436
+    second: A_Fan.001|ArmatureAction.002
+  - first:
+      74: 2004559317443802308
     second: FanSpin
   externalObjects: {}
   materials:
@@ -38,11 +41,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Stop
-      takeName: A_Fan|ArmatureAction
+      name: FanSpin
+      takeName: A_Fan.001|ArmatureAction.002
       internalID: 0
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -67,11 +70,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: FanSpin
-      takeName: A_Fan|ArmatureAction.001
+      name: Stop
+      takeName: A_Fan.001|ArmatureAction.001
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 0
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

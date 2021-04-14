@@ -15,8 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 vel;
     Vector3 additionForce = Vector3.zero;
 
-
-
+    //Is the player Ground pounding
+     bool groundPounding = false;
+ 
     [Header("Player movement attributes")]
     [SerializeField]
     private float iceFriction = 1.0f;
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("How fast the player accelerates")]
     private float acceleration = 1.0f;
 
-    private BoxCollider collider;
+    private Collider collider;
     private int extraJumpCounter;
 
     //Animation Properties
@@ -44,24 +45,28 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject camPivot;
 
+    public bool GroundPounding { get => groundPounding;}
+
     void Start()
     {
         extraJumpCounter = 1;
         playerSpeed = 5.0f;
         jumpForce = 5.0f;
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<BoxCollider>();
+        collider = GetComponent<Collider>();
         //transform.position = new Vector3(10,3,10);
     }
     private void CameraControls()
     {
-        float minFOV = 40f;
+        float minFOV = 60f;
         float maxFOV = 80f;
         float FOVmultiplier = 20;
 
         float yAcceleration = rb.velocity.y * Time.deltaTime;
         yAcceleration = Mathf.Abs(yAcceleration);
         deltaAccleration = yAcceleration - deltaAccleration;
+
+        //Dynamically update FOV
         if (IsGrounded())
         {
             characterCamera.fieldOfView -= 0.05f;
@@ -106,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
         }
         return false;
     }
+
     private bool IsGrounded()//checks if the player is touching the ground via raycasting
     {
         float distanceToGround = collider.bounds.extents.y;
@@ -131,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         {
             fallTimer -= Time.deltaTime*900;
         }
-        print(fallTimer);
+        //print(fallTimer);
         CameraControls();
         //basic player movement
         movementX = Input.GetAxis("Horizontal");
@@ -151,16 +157,18 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new Vector3(0,jumpForce,0),ForceMode.Impulse);
         }
 
+
+      
         //Disable player directional movement while in ice form
         if (PlayerState.currentPlayerState != PlayerMatterState.ICE)
         {
-            if(additionForce != Vector3.zero)
+
+            if (additionForce != Vector3.zero)
             {
                 input += additionForce;
             }
 
-
-            //Move velocity
+            //Change velocity
             if (input != Vector3.zero)
             {
                 //Increase player speed gradually
@@ -181,10 +189,24 @@ public class PlayerMovement : MonoBehaviour
             }
             additionForce = Vector3.zero;
         }
+        //PLAYER IS IN ICE FORM
         else
         {
             //Reduce speed over time
             vel = Vector3.Lerp( vel,Vector3.zero,Time.deltaTime * iceFriction);
+
+            //Check for GroundPound
+
+            if(!IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && !groundPounding)
+            {
+                StartCoroutine(GroundPound());
+            }
+
+            if (additionForce != Vector3.zero)
+            {
+                vel += additionForce;
+            }
+            additionForce = Vector3.zero;
         }
 
         //Disable Gravity for cloud state
@@ -203,15 +225,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-
         //Update position
-        //transform.position += new Vector3(vel.x,vel.y,vel.z)* playerSpeed* Time.deltaTime;
 
         //Set animator floats
         anim.SetFloat("HorizSpeed", input.magnitude);
         anim.SetFloat("VertSpeed", rb.velocity.y);
 
-
+        //Make input relative to camera view
         Vector3 finalVel = Vector3.zero;
 
         finalVel += camPivot.transform.forward * vel.z;
@@ -227,12 +247,7 @@ public class PlayerMovement : MonoBehaviour
            visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
             Mathf.LerpAngle(visObject.transform.eulerAngles.y, Mathf.Rad2Deg * vertRot, Time.deltaTime * 15f)
             , visObject.transform.eulerAngles.z);
-
-            //visObject.transform.eulerAngles = new Vector3(visObject.transform.eulerAngles.x,
-            //        camPivot.transform.eulerAngles.y,
-            //         visObject.transform.eulerAngles.z) ;
         }
-
 
         camPivot.transform.position = transform.position;
         transform.position += finalVel * Time.deltaTime * playerSpeed;
@@ -246,5 +261,36 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Grounded", false);
         }
+    }
+
+
+    IEnumerator GroundPound()
+    {
+        rb.isKinematic = true;
+        vel = Vector3.zero;
+
+        //yield return new WaitForSeconds(0.1f);
+
+        for (int i = 0; i < 10; i++)
+        {
+            visObject.transform.Rotate(transform.right, 36.0f);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+
+        rb.isKinematic = false;
+        InfluenceVelocity(new Vector3(0, -2f, 0));
+        groundPounding = true;
+
+        //Is falling
+        while(!IsGrounded())
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds(0.1f);
+
+        groundPounding = false;
+        //Prevent glitches through the grounds
+        transform.position += Vector3.up * 0.1f;
     }
 }
