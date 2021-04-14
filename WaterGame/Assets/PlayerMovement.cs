@@ -52,6 +52,9 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject camPivot;
 
+    //PauseMenu
+    public GameObject pausePanel;
+
     public bool GroundPounding { get => groundPounding;}
 
     void Start()
@@ -138,6 +141,12 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            bool isPaused = pausePanel.activeSelf;
+            isPaused = !isPaused;
+            pausePanel.SetActive(isPaused);
+        }
         if (IsFalling())
         {
             fallTimer -= Time.deltaTime*900;
