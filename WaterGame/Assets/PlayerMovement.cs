@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
         jumpForce = 5.0f;
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-        //transform.position = new Vector3(10,3,10);
     }
     private void CameraControls()
     {
