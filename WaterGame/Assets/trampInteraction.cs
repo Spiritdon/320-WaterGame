@@ -21,11 +21,12 @@ public class trampInteraction : MonoBehaviour
         if (collision.other.CompareTag("Player") && PlayerState.currentPlayerState == PlayerMatterState.ICE)
         {
             Rigidbody playerRB = collision.other.GetComponent<Rigidbody>();
-            if (tramForce<25)
-            {
-                tramForce += Mathf.Abs(playerRB.velocity.y);
-            }
+            tramForce += Mathf.Abs(playerRB.velocity.y);
             print(tramForce);
+            if (tramForce>=30)
+            {
+                tramForce = 30;
+            }
             playerRB.AddForce(Vector3.up * tramForce, ForceMode.Impulse);
         }
     }
