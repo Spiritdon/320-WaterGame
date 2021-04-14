@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1.33
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1281494976dd08f49932bea27d7e772e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -142,6 +142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 140240325}
+  - component: {fileID: 140240326}
   m_Layer: 0
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -164,6 +165,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &140240326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140240324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86df4d88fb5a894fa7672c22c9a1243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRb: {fileID: 314044337}
+  characterCamera: {fileID: 963194227}
+  movementSpeed: 8
+  cameraLead: 1
+  leadAmount: 1
 --- !u!1001 &166679439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -359,7 +377,6 @@ MonoBehaviour:
   sprintSys: {fileID: 504357141}
   anim: {fileID: 1572934776}
   visObject: {fileID: 977744428}
-  characterCamera: {fileID: 963194227}
   camPivot: {fileID: 140240324}
   panel: {fileID: 617602936}
 --- !u!54 &314044337
@@ -16773,22 +16790,22 @@ PrefabInstance:
     - target: {fileID: 4081249269399639509, guid: d91573da3b889124bb27e26b6c93fa65,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.8660255
+      value: -0.72821194
       objectReference: {fileID: 0}
     - target: {fileID: 4081249269399639509, guid: d91573da3b889124bb27e26b6c93fa65,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000002235174
+      value: 0.00000008940696
       objectReference: {fileID: 0}
     - target: {fileID: 4081249269399639509, guid: d91573da3b889124bb27e26b6c93fa65,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.49999982
+      value: 0.685352
       objectReference: {fileID: 0}
     - target: {fileID: 4081249269399639509, guid: d91573da3b889124bb27e26b6c93fa65,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -120
+      value: -93.473
       objectReference: {fileID: 0}
     - target: {fileID: 4081249269399639509, guid: d91573da3b889124bb27e26b6c93fa65,
         type: 3}

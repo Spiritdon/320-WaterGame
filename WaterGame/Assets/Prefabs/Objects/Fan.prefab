@@ -5136,6 +5136,7 @@ GameObject:
   - component: {fileID: 6248364029142582963}
   - component: {fileID: 24357679550078153}
   - component: {fileID: 2187641485695413215}
+  - component: {fileID: 127571239386972937}
   m_Layer: 0
   m_Name: Fan
   m_TagString: Untagged
@@ -5198,6 +5199,19 @@ MonoBehaviour:
   particles: {fileID: 6429438490274229252}
   anim: {fileID: 24357679550078153}
   connectedButtons: []
+--- !u!65 &127571239386972937
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6772698427583044617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0836048, y: 2.1933794, z: 2.1512616}
+  m_Center: {x: 0.00918293, y: 1.0319228, z: -0.4101988}
 --- !u!1 &7044047318490653062
 GameObject:
   m_ObjectHideFlags: 0
@@ -5209,6 +5223,8 @@ GameObject:
   - component: {fileID: 4081249269399639509}
   - component: {fileID: 6490902803812776949}
   - component: {fileID: 5542789909190502111}
+  - component: {fileID: 4011697099983861137}
+  - component: {fileID: 882252266618529449}
   m_Layer: 0
   m_Name: Fan_Motor
   m_TagString: Untagged
@@ -5280,6 +5296,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4011697099983861137
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044047318490653062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.009413011, y: 0.017099656, z: 0.009413004}
+  m_Center: {x: 0.0000000034924597, y: -0.00072906434, z: -0.0013096031}
+--- !u!65 &882252266618529449
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044047318490653062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02878932, y: 0.0074947346, z: 0.026194056}
+  m_Center: {x: -0.00032140076, y: -0.009947625, z: -0.0011992002}
 --- !u!1 &7566168481850959623
 GameObject:
   m_ObjectHideFlags: 0

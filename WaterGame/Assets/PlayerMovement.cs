@@ -41,15 +41,13 @@ public class PlayerMovement : MonoBehaviour
     //Particles
     public ParticleSystem jumpSys;
     public ParticleSystem sprintSys;
+
     //Animation Properties
     public Animator anim;
     public GameObject visObject;
 
     //Camera
-    public Camera characterCamera;
-    Vector3 mousePosition;
-    float deltaAccleration = 0;
-    float fallTimer = 2.0f;
+    
 
     public GameObject camPivot;
 
@@ -68,53 +66,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
     }
-    private void CameraControls()
-    {
-        float minFOV = 60f;
-        float maxFOV = 80f;
-        float FOVmultiplier = 20;
 
-        float yAcceleration = rb.velocity.y * Time.deltaTime;
-        yAcceleration = Mathf.Abs(yAcceleration);
-        deltaAccleration = yAcceleration - deltaAccleration;
-
-        //Dynamically update FOV
-        if (IsGrounded())
-        {
-            characterCamera.fieldOfView -= 0.05f;
-        }
-        if (deltaAccleration<=0 && fallTimer<=0)
-        {
-            characterCamera.fieldOfView -= 0.05f;
-        }
-        else
-        {
-            characterCamera.fieldOfView += yAcceleration * FOVmultiplier;
-        }
-
-        characterCamera.fieldOfView = Mathf.Clamp(characterCamera.fieldOfView, minFOV, maxFOV);
-
-
-        //Temp
-        if (Input.GetKey(KeyCode.E))
-        {
-            camPivot.transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            camPivot.transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
-        }
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            lastMousePositionX = Input.mousePosition.x;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            deltaMousePosition = Input.mousePosition.x - lastMousePositionX;
-        }*/
-
-    }
-    private bool IsFalling()
+    public bool IsFalling()
     {
         if (rb.velocity.y < 0)
         {
@@ -123,10 +76,9 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    private bool IsGrounded()//checks if the player is touching the ground via raycasting
+    public bool IsGrounded()//checks if the player is touching the ground via raycasting
     {
         float distanceToGround = collider.bounds.extents.y;
-        fallTimer = 2.0f;
         return Physics.Raycast(transform.position, -Vector3.up,distanceToGround +0.1f);
         ///for this to return true their must be a intercetion between the ray and the ground 
         ///because the box collider can prevent a intercection(distance can be zero and is therefore not interceting)
@@ -150,12 +102,9 @@ public class PlayerMovement : MonoBehaviour
             isPanelActive = !isPanelActive;
             panel.SetActive(isPanelActive);
         }
-        if (IsFalling())
-        {
-            fallTimer -= Time.deltaTime*900;
-        }
+       
         //print(fallTimer);
-        CameraControls();
+        
         //basic player movement
         movementX = Input.GetAxis("Horizontal");
         movementZ = Input.GetAxis("Vertical");
@@ -273,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
             , visObject.transform.eulerAngles.z);
         }
 
-        camPivot.transform.position = transform.position;
+       
         transform.position += finalVel * Time.deltaTime * playerSpeed;
 
         //Check if grounded
