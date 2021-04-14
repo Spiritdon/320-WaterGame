@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     public void InfluenceVelocity(Vector3 velAddition)
     {
         //Average velocity with argument velocity
-        additionForce = velAddition;
+        additionForce += velAddition;
 
         //rb.AddForce(velAddition, ForceMode.Acceleration);
     }
@@ -138,8 +138,8 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            //Add the force if not zero
-            input += additionForce;
+            ////Add the force if not zero
+            //input += additionForce;
 
             //Change velocity
             if (input != Vector3.zero)
@@ -160,8 +160,10 @@ public class PlayerMovement : MonoBehaviour
                     vel = Vector3.Lerp(vel, input, Time.deltaTime * friction);
                 }
             }
-            additionForce = Vector3.zero;
+            //additionForce = Vector3.zero;
         }
+
+
         //PLAYER IS IN ICE FORM
         else
         {
@@ -174,12 +176,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine(GroundPound());
             }
-
-            if (additionForce != Vector3.zero)
-            {
-                vel += additionForce;
-            }
-            additionForce = Vector3.zero;
+            
         }
 
         //Disable Gravity for cloud state
@@ -211,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
         finalVel += camPivot.transform.right * vel.x;
         finalVel += camPivot.transform.up * vel.y;
 
+        finalVel += additionForce;
 
         //If moving, update rotation angle
         if (input.magnitude != 0.0f)
@@ -234,6 +232,9 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Grounded", false);
         }
+
+        //Reset addition force
+        additionForce = Vector3.zero;
     }
 
     IEnumerator SprintCooldown()
