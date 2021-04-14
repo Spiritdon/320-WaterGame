@@ -8,19 +8,22 @@ public class CameraController : MonoBehaviour
     [SerializeField] Rigidbody playerRb;
     PlayerMovement playerObject;
     public Camera characterCamera;
-    Vector3 mousePosition;
+    //Vector3 mousePosition;
 
     //Fields
     float deltaAccleration = 0;
     float fallTimer = 2.0f;
     [SerializeField] float movementSpeed = 100f;    //Higher values = more responsive
 
-
-
+    private float lastMousePosition;
+    private Vector3 defaultCamera;
+    private Quaternion defaultRotation;
     // Start is called before the first frame update
     void Start()
     {
         playerObject = playerRb.gameObject.GetComponent<PlayerMovement>();
+        defaultRotation = transform.rotation;
+        defaultCamera = transform.position;
     }
 
     // Update is called once per frame
@@ -60,25 +63,71 @@ public class CameraController : MonoBehaviour
         }
 
         //Temp
-        if (Input.GetKey(KeyCode.E))
+        /*if (Input.GetKey(KeyCode.E))
         {
             transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.Q))
         {
             transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
-        }
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            lastMousePositionX = Input.mousePosition.x;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            deltaMousePosition = Input.mousePosition.x - lastMousePositionX;
         }*/
 
         //Match player position
         transform.position = Vector3.Lerp(transform.position, playerObject.transform.position, Time.deltaTime * movementSpeed);
-       
+        RotateCamera();
+    }
+    private void RotateCamera()
+    {
+        float offSet = 0;
+        float offSetSensitivity = 10;
+        if (Input.GetMouseButtonDown(0))
+        {
+            lastMousePosition = Input.mousePosition.x;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            offSet = Input.mousePosition.x - lastMousePosition;
+        }
+        offSet = offSet / offSetSensitivity;
+        float absOffSet = Mathf.Abs(offSet);
+
+        if (absOffSet<=30 && offSet > 0)
+        {
+            transform.RotateAround(transform.position, Vector3.up, 30 * Time.deltaTime);
+        }
+        if (absOffSet <= 30 && offSet < 0)
+        {
+            transform.RotateAround(transform.position, Vector3.up, -30 * Time.deltaTime);
+        }
+
+        if (absOffSet <= 50 && absOffSet > 30 && offSet > 0)
+        {
+            transform.RotateAround(transform.position, Vector3.up, 60 * Time.deltaTime);
+        }
+        if (absOffSet <= 50 && absOffSet > 30 && offSet < 0)
+        {
+            transform.RotateAround(transform.position, Vector3.up, -60 * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(KeyCode.R))//resets camera
+        {
+            transform.rotation = defaultRotation;
+            transform.position = defaultCamera;
+        }
+
+        /*if (offSet>0)
+        {
+            transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
+        }
+        else if (offSet<0)
+        {
+            transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
+        }
+        else
+        {
+
+        }*/
+        //offSet = offSet / offSetSensitivity;
+        //characterCamera.transform.RotateAround(transform.position,Vector3.up,offSet); seems to break the player movement
+        Debug.Log(offSet);
     }
 }
