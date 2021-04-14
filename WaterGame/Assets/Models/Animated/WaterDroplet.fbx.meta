@@ -30,6 +30,9 @@ ModelImporter:
   - first:
       74: -6402709644054655732
     second: Jump_Start
+  - first:
+      74: -8086047558812005389
+    second: Sprint
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -91,7 +94,7 @@ ModelImporter:
       name: Jump_End
       takeName: Top_IK|Jump_End
       internalID: 0
-      firstFrame: 11
+      firstFrame: 5.8
       lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
@@ -99,7 +102,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
