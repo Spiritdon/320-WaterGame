@@ -14,10 +14,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector3 vel;
     Vector3 additionForce = Vector3.zero;
-    [SerializeField] float sprintCooldown = 1.0f;
-    bool canSprint = true;
-
-
 
     //Is the player Ground pounding
      bool groundPounding = false;
@@ -36,10 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Collider collider;
     private int extraJumpCounter;
-
-    //Particles
     public ParticleSystem jumpSys;
-    public ParticleSystem sprintSys;
+
     //Animation Properties
     public Animator anim;
     public GameObject visObject;
@@ -113,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool IsFalling()
     {
+        
         if (rb.velocity.y < 0)
         {
             return true;
@@ -170,24 +165,19 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpParticle()); //Play Particle effect
             extraJumpCounter--;
             rb.AddForce(new Vector3(0,jumpForce,0),ForceMode.Impulse);
+           
         }
 
-       
+
+      
         //Disable player directional movement while in ice form
         if (PlayerState.currentPlayerState != PlayerMatterState.ICE)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canSprint)
-            {
-                //Sprint
-                if (PlayerState.currentPlayerState == PlayerMatterState.DROP)
-                {
-                    InfluenceVelocity(visObject.transform.forward * 250f);
-                    StartCoroutine(SprintCooldown());
-                }
-            }
 
-            //Add the force if not zero
-            input += additionForce;
+            if (additionForce != Vector3.zero)
+            {
+                input += additionForce;
+            }
 
             //Change velocity
             if (input != Vector3.zero)
@@ -218,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
 
             //Check for GroundPound
 
-            if(!IsGrounded() && Input.GetKeyDown(KeyCode.LeftControl) && !groundPounding)
+            if(!IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && !groundPounding)
             {
                 StartCoroutine(GroundPound());
             }
@@ -274,25 +264,17 @@ public class PlayerMovement : MonoBehaviour
         transform.position += finalVel * Time.deltaTime * playerSpeed;
 
         //Check if grounded
-        if (IsGrounded())
+        if (rb.velocity.y == 0.0f)
         {
             anim.SetBool("Grounded", true);
         }
-        else if(Mathf.Abs(rb.velocity.y) > 0.0f)
+        else
         {
             anim.SetBool("Grounded", false);
         }
     }
 
-    IEnumerator SprintCooldown()
-    {
-        canSprint = false;
-        sprintSys.Play();
-        yield return new WaitForSeconds(sprintCooldown);
-        sprintSys.Stop();
-        
-        canSprint = true;
-    }
+
     IEnumerator JumpParticle()
     {
         jumpSys.Play();
