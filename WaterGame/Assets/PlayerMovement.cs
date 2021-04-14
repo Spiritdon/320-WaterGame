@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Collider collider;
     private int extraJumpCounter;
+    public ParticleSystem jumpSys;
 
     //Animation Properties
     public Animator anim;
@@ -152,8 +153,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space)&& extraJumpCounter != 0)//allow the player to jump as long as they are pressing space and they have extra jumps
         {
+            StartCoroutine(JumpParticle()); //Play Particle effect
             extraJumpCounter--;
             rb.AddForce(new Vector3(0,jumpForce,0),ForceMode.Impulse);
+           
         }
 
 
@@ -263,6 +266,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    IEnumerator JumpParticle()
+    {
+        jumpSys.Play();
+
+        yield return new WaitForSeconds(0.1f);
+        jumpSys.Stop();
+    }
     IEnumerator GroundPound()
     {
         rb.isKinematic = true;
