@@ -78,8 +78,7 @@ public class CameraController : MonoBehaviour
     }
     private void RotateCamera()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        
         float offSet = 0;
         float offSetSensitivity = 1000;
         if (Input.GetMouseButtonDown(0))
@@ -130,6 +129,6 @@ public class CameraController : MonoBehaviour
         }
         //offSet = offSet / offSetSensitivity;
         //characterCamera.transform.RotateAround(transform.position,Vector3.up,offSet); seems to break the player movement
-        Debug.Log(offSet);
+        //Debug.Log(offSet);
     }
 }

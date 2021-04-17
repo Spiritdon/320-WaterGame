@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
  
     [Header("Player movement attributes")]
     [SerializeField]
-    private float iceFriction = 1.0f;
+    private float iceFriction = 20f;
     [SerializeField]
     private float cloudJumpDamper = 1.0f;
     [SerializeField]
@@ -65,11 +65,13 @@ public class PlayerMovement : MonoBehaviour
         jumpForce = 5.0f;
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public bool IsFalling()
     {
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < -1f)
         {
             return true;
         }
@@ -96,11 +98,22 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        print(IsFalling());
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isPanelActive = panel.activeSelf;
             isPanelActive = !isPanelActive;
             panel.SetActive(isPanelActive);
+            if (isPanelActive)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
        
         //print(fallTimer);
@@ -121,7 +134,16 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(JumpParticle()); //Play Particle effect
             extraJumpCounter--;
-            rb.AddForce(new Vector3(0,jumpForce,0),ForceMode.Impulse);
+            float forceOfAcceleration =Mathf.Abs(rb.mass*Physics.gravity.y);
+            if (IsFalling())//canceling out the Force of Gravity for mroe effective double jumping
+            {
+                float tempForce = jumpForce + forceOfAcceleration;
+                rb.AddForce(new Vector3(0, tempForce, 0), ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            }
         }
 
        
@@ -182,6 +204,7 @@ public class PlayerMovement : MonoBehaviour
         //Disable Gravity for cloud state
         if(PlayerState.currentPlayerState != PlayerMatterState.CLOUD)
         {
+            
             rb.useGravity = true;
         }
         else
