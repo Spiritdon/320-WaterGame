@@ -26,18 +26,18 @@ public class GrateInteraction : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                if (PlayerState.currentPlayerState == PlayerMatterState.DROP)
+                if (PlayerState.currentPlayerState == PlayerMatterState.ICE)
                 {
-                    grateCol.enabled = false;
+                    grateCol.enabled = true;
                 }
                 else
                 {
-                    grateCol.enabled = true;
+                    grateCol.enabled = false;
                 }
             }
             else
             {
-                grateCol.enabled = true;
+                grateCol.enabled = false;
             }
         }
         else
@@ -45,7 +45,7 @@ public class GrateInteraction : MonoBehaviour
             //ReEnable collision
             if (other.gameObject.CompareTag("Player"))
             {
-                 grateCol.enabled = true;
+                 grateCol.enabled = false;
             }
 
         }

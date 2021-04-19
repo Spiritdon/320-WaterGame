@@ -806,7 +806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprintCooldown: 1
-  iceFriction: 1
+  iceFriction: 0.6
   cloudJumpDamper: 1
   friction: 2
   acceleration: 6

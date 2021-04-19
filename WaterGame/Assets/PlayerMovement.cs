@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
  
     [Header("Player movement attributes")]
     [SerializeField]
-    private float iceFriction = 20f;
+    private float iceFriction = 0f;
     [SerializeField]
     private float cloudJumpDamper = 1.0f;
     [SerializeField]
