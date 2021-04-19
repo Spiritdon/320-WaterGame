@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintCooldown = 1.0f;
     bool canSprint = true;
 
+    float visObjectLerpSpeed = 30f;
+
 
 
     //Is the player Ground pounding
@@ -247,6 +249,7 @@ public class PlayerMovement : MonoBehaviour
 
        
         transform.position += finalVel * Time.deltaTime * playerSpeed;
+        visObject.transform.position = Vector3.Lerp(visObject.transform.position, transform.position, visObjectLerpSpeed * Time.deltaTime);
 
         //Check if grounded
         if (IsGrounded())
