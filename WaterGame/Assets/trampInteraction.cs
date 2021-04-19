@@ -25,7 +25,7 @@ public class trampInteraction : MonoBehaviour
             {
                 tramForce += Mathf.Abs(playerRB.velocity.y);
             }
-            print(tramForce);
+            //print(tramForce);
             playerRB.AddForce(Vector3.up * tramForce, ForceMode.Impulse);
         }
     }
