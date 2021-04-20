@@ -59,9 +59,15 @@ public class PlayerMovement : MonoBehaviour
     public GameObject panel;
     bool isPanelActive;
 
+    public LayerMask trampCheckLayer;
+    private float trampActivationTimer;
+    private bool canBounce;
+
 
     void Start()
     {
+        canBounce = true;
+        trampActivationTimer = 0f;
         extraJumpCounter = 1;
         playerSpeed = 5.0f;
         jumpForce = 5.0f;
@@ -89,6 +95,15 @@ public class PlayerMovement : MonoBehaviour
         ///so the +.1f ensures when the player lands their is a intercetion  
         
     }
+    public bool IsTrampHit()
+    {
+        if (PlayerState.currentPlayerState == PlayerMatterState.ICE)
+        {
+            float distanceToGround = collider.bounds.extents.y;
+            return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.2f, trampCheckLayer);
+        }
+        return false;
+    }
     // Update is called once per frame
 
     public void InfluenceVelocity(Vector3 velAddition)
@@ -100,7 +115,20 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        trampActivationTimer -= Time.deltaTime;
+        print(trampActivationTimer);
+        //print(IsTrampHit());
+        if (IsTrampHit() && trampActivationTimer <= 0f)
+        {
+            vel.y = 0;
+            float tramForce = 25;
+            print(tramForce);
+            rb.AddForce(Vector3.up * tramForce, ForceMode.Impulse);
+            trampActivationTimer = 0.1f;
+        }
+
         //print(IsFalling());
+        //print(IsGrounded());
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isPanelActive = panel.activeSelf;
