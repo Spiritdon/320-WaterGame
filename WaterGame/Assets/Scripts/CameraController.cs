@@ -128,7 +128,7 @@ public class CameraController : MonoBehaviour
 
         }
         //offSet = offSet / offSetSensitivity;
-        //characterCamera.transform.RotateAround(transform.position,Vector3.up,offSet); seems to break the player movement
+        transform.RotateAround(transform.position,Vector3.up,  Time.deltaTime * offSetSensitivity * Input.GetAxis("Mouse X"));
         //Debug.Log(offSet);
     }
 }

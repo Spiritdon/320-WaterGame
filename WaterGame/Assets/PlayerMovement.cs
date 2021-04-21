@@ -15,15 +15,23 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector3 vel;
     Vector3 additionForce = Vector3.zero;
-    [SerializeField] float sprintCooldown = 1.0f;
-    bool canSprint = true;
-
     float visObjectLerpSpeed = 30f;
+
+
+    Vector3 relativeVel = Vector3.zero;
+
+
+    //Dash stuff
+    [SerializeField] float dashCooldown = 1.0f;
+    bool canDash = true;
+    bool isDashing = false;
+    float dashTime = 0.01f;
+    float dashTimeElapsed = 0.0f;
 
 
 
     //Is the player Ground pounding
-     bool groundPounding = false;
+    bool groundPounding = false;
  
     [Header("Player movement attributes")]
     [SerializeField]
@@ -36,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("How fast the player accelerates")]
     private float acceleration = 1.0f;
+
+  
 
     private Collider collider;
     private int extraJumpCounter;
@@ -116,8 +126,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         trampActivationTimer -= Time.deltaTime;
-        print(trampActivationTimer);
-        //print(IsTrampHit());
+       //print(trampActivationTimer);
+
         if (IsTrampHit() && trampActivationTimer <= 0f)
         {
             vel.y = 0;
@@ -129,6 +139,8 @@ public class PlayerMovement : MonoBehaviour
 
         //print(IsFalling());
         //print(IsGrounded());
+
+        //Pause Menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isPanelActive = panel.activeSelf;
@@ -178,17 +190,32 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+
+        if(isDashing)
+        {
+            dashTimeElapsed += Time.deltaTime;
+
+            if (dashTimeElapsed <= dashTime)
+            {
+                InfluenceVelocity(visObject.transform.forward * 100f);
+            }
+            else
+            {
+                isDashing = false;
+                dashTimeElapsed = 0.0f;
+                StartCoroutine(SprintCooldown());
+            }
+        }
        
         //Disable player directional movement while in ice form
         if (PlayerState.currentPlayerState != PlayerMatterState.ICE)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canSprint)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
             {
-                //Sprint
+                //Dash
                 if (PlayerState.currentPlayerState == PlayerMatterState.DROP)
                 {
-                    InfluenceVelocity(visObject.transform.forward * 250f);
-                    StartCoroutine(SprintCooldown());
+                    isDashing = true;
                 }
             }
 
@@ -236,7 +263,6 @@ public class PlayerMovement : MonoBehaviour
         //Disable Gravity for cloud state
         if(PlayerState.currentPlayerState != PlayerMatterState.CLOUD)
         {
-            
             rb.useGravity = true;
         }
         else
@@ -263,7 +289,11 @@ public class PlayerMovement : MonoBehaviour
         finalVel += camPivot.transform.right * vel.x;
         finalVel += camPivot.transform.up * vel.y;
 
+
+        //TODO:Ethan - Clean this up
         finalVel += additionForce;
+
+        relativeVel = Vector3.Lerp(relativeVel, finalVel, Time.deltaTime * acceleration);
 
         //If moving, update rotation angle
         if (input.magnitude != 0.0f)
@@ -275,8 +305,8 @@ public class PlayerMovement : MonoBehaviour
             , visObject.transform.eulerAngles.z);
         }
 
-       
-        transform.position += finalVel * Time.deltaTime * playerSpeed;
+
+        transform.position += relativeVel * Time.deltaTime * playerSpeed;
         visObject.transform.position = Vector3.Lerp(visObject.transform.position, transform.position, visObjectLerpSpeed * Time.deltaTime);
 
         //Check if grounded
@@ -295,12 +325,12 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator SprintCooldown()
     {
-        canSprint = false;
+        canDash = false;
         sprintSys.Play();
-        yield return new WaitForSeconds(sprintCooldown);
+        yield return new WaitForSeconds(dashCooldown);
         sprintSys.Stop();
         
-        canSprint = true;
+        canDash = true;
     }
     IEnumerator JumpParticle()
     {
