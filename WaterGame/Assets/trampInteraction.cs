@@ -5,45 +5,51 @@ using UnityEngine;
 public class trampInteraction : MonoBehaviour
 {
     private float tramForce;
-    private TriggerEvent triggerEvent;
+    //public TriggerEvent triggerEvent;
+    public TriggerEventTramp triggerEventTramp;
     public PlayerMovement movement;
-    public GameObject player;
+    public Rigidbody player;
+    bool trampActive;
+    //float trampTimer;
+
     // Start is called before the first frame update
     void Start()
     {
+        //trampTimer = 0.5f;
         tramForce = 25;
+        triggerEventTramp.triggerEvents += TriggerEventTramp;
+    }
+    void OnDestroy()
+    {
+        triggerEventTramp.triggerEvents -= TriggerEventTramp;
     }
 
-    // Update is called once per frame
-    void Update()
+    void TriggerEventTramp(TriggerStates triggerState, Collider other)
     {
-        /*if (movement.IsTrampHit())
+        if (triggerState != TriggerStates.Exit)
         {
-            Rigidbody playerRB = player.GetComponent<Rigidbody>();
-            tramForce = 25;
-            print(tramForce);
-            playerRB.AddForce(Vector3.up * tramForce, ForceMode.Impulse);
-        }*/
-    }
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.other.CompareTag("Player") && PlayerState.currentPlayerState == PlayerMatterState.ICE)
-        {
-            Rigidbody playerRB = collision.other.GetComponent<Rigidbody>();
-            //tramForce += Mathf.Abs(playerRB.velocity.y);
-            if (tramForce<25)
+            if (other.CompareTag("Player") && PlayerState.currentPlayerState == PlayerMatterState.ICE)
             {
+                if (other.GetComponent<PlayerMovement>().IsTrampHit())
+                {
+                    if (!trampActive)
+                    {
+                        trampActive = true;
+                        Bounce();
+                    }
+
+                }
 
             }
-            else if(tramForce >= 25)
-            {
-                tramForce = 25;
-            }
-            tramForce = 25;
-            print(tramForce);
-            playerRB.AddForce(Vector3.up * tramForce, ForceMode.Impulse);
         }
-        
-
-    }*/
+        else
+        {
+            trampActive = false;
+        }
+    }
+    void Bounce()
+    {
+        tramForce = 25;
+        player.AddForce(transform.up * tramForce, ForceMode.Impulse);
+    }
 }
