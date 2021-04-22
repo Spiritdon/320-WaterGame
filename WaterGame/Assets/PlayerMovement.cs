@@ -160,12 +160,16 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpParticle()); //Play Particle effect
             extraJumpCounter--;
             float momentumY =Mathf.Abs(rb.mass*rb.velocity.y);
-            if (IsFalling())//canceling out the Force of Gravity for mroe effective double jumping
+            //this calculates the momentum (Momentum = Max * Velocity) 
+            //The Force of Momentum is (Force of Momentum = Momentum/Deltatime) 
+            //Force is instantous so time isnt a factor so Force of Momentum
+            //So Force Of Momentum = Momentum;
+            if (IsFalling())//canceling out the Force of Momentum for Video Game Double Jumping When Falling
             {
                 float tempForce = jumpForce + momentumY;
                 rb.AddForce(new Vector3(0, tempForce, 0), ForceMode.Impulse);
             }
-            else
+            else//Other Wise Jump Normally
             {
                 rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             }
