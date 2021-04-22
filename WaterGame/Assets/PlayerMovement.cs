@@ -70,14 +70,10 @@ public class PlayerMovement : MonoBehaviour
     bool isPanelActive;
 
     public LayerMask trampCheckLayer;
-    private float trampActivationTimer;
-    private bool canBounce;
 
 
     void Start()
     {
-        canBounce = true;
-        trampActivationTimer = 0f;
         extraJumpCounter = 1;
         playerSpeed = 5.0f;
         jumpForce = 5.0f;
@@ -89,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsFalling()
     {
-        if (rb.velocity.y < -1f)
+        if (rb.velocity.y < -0.1f)
         {
             return true;
         }
@@ -125,21 +121,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        trampActivationTimer -= Time.deltaTime;
-       //print(trampActivationTimer);
-
-        if (IsTrampHit() && trampActivationTimer <= 0f)
-        {
-            vel.y = 0;
-            float tramForce = 25;
-            print(tramForce);
-            rb.AddForce(Vector3.up * tramForce, ForceMode.Impulse);
-            trampActivationTimer = 0.1f;
-        }
-
-        //print(IsFalling());
-        //print(IsGrounded());
-
         //Pause Menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -178,10 +159,10 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(JumpParticle()); //Play Particle effect
             extraJumpCounter--;
-            float forceOfAcceleration =Mathf.Abs(rb.mass*Physics.gravity.y);
+            float momentumY =Mathf.Abs(rb.mass*rb.velocity.y);
             if (IsFalling())//canceling out the Force of Gravity for mroe effective double jumping
             {
-                float tempForce = jumpForce + forceOfAcceleration;
+                float tempForce = jumpForce + momentumY;
                 rb.AddForce(new Vector3(0, tempForce, 0), ForceMode.Impulse);
             }
             else
