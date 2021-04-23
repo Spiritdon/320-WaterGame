@@ -119,6 +119,13 @@ public class PlayerMovement : MonoBehaviour
 
         //rb.AddForce(velAddition, ForceMode.Acceleration);
     }
+    public void ClosePauseMenu()
+    {
+        panel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1.0f;
+    }
     void Update()
     {
         //Pause Menu
@@ -131,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                Time.timeScale = 0.01f;
+                Time.timeScale = 0f;
             }
             else
             {
