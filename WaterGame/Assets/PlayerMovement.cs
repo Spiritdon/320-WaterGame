@@ -71,9 +71,15 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask trampCheckLayer;
 
+    private float floatTimer;
+    private float floatForce;
+    private float cloudGravity;
 
     void Start()
     {
+        cloudGravity = Physics.gravity.y / 20;
+        floatForce = 0.5f;
+        floatTimer = 3;
         extraJumpCounter = 1;
         playerSpeed = 5.0f;
         jumpForce = 5.0f;
@@ -161,26 +167,39 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded())//if the player is touching the ground replenish his double jump
         {
             extraJumpCounter = 1;
+            floatTimer = 3;
         }
-        if (Input.GetKeyDown(KeyCode.Space)&& extraJumpCounter != 0)//allow the player to jump as long as they are pressing space and they have extra jumps
+        if (PlayerState.currentPlayerState == PlayerMatterState.ICE || PlayerState.currentPlayerState == PlayerMatterState.DROP)
         {
-            StartCoroutine(JumpParticle()); //Play Particle effect
-            extraJumpCounter--;
-            float momentumY =Mathf.Abs(rb.mass*rb.velocity.y);
-            //this calculates the momentum (Momentum = Max * Velocity) 
-            //The Force of Momentum is (Force of Momentum = Momentum/Deltatime) 
-            //Force is instantous so time isnt a factor so Force of Momentum
-            //So Force Of Momentum = Momentum;
-            if (IsFalling())//canceling out the Force of Momentum for Video Game Double Jumping When Falling
+            if (Input.GetKeyDown(KeyCode.Space) && extraJumpCounter != 0)//allow the player to jump as long as they are pressing space and they have extra jumps
             {
-                float tempForce = jumpForce + momentumY;
-                rb.AddForce(new Vector3(0, tempForce, 0), ForceMode.Impulse);
-            }
-            else//Other Wise Jump Normally
-            {
-                rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                StartCoroutine(JumpParticle()); //Play Particle effect
+                extraJumpCounter--;
+                float momentumY = Mathf.Abs(rb.mass * rb.velocity.y);
+                //this calculates the momentum (Momentum = Max * Velocity) 
+                //The Force of Momentum is (Force of Momentum = Momentum/Deltatime) 
+                //Force is instantous so time isnt a factor so Force of Momentum
+                //So Force Of Momentum = Momentum;
+                if (IsFalling())//canceling out the Force of Momentum for Video Game Double Jumping When Falling
+                {
+                    float tempForce = jumpForce + momentumY;
+                    rb.AddForce(new Vector3(0, tempForce, 0), ForceMode.Impulse);
+                }
+                else//Other Wise Jump Normally
+                {
+                    rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                }
             }
         }
+        else
+        {
+            if (Input.GetKey(KeyCode.Space) && floatTimer > 0)//allow the player to jump as long as they are pressing space and they have extra jumps
+            {
+                rb.AddForce(new Vector3(0, floatForce, 0),ForceMode.Acceleration);
+                floatTimer -= Time.deltaTime;
+            }
+        }
+        print(floatTimer);
 
 
         if(isDashing)
@@ -259,10 +278,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            
             rb.useGravity = false;
-
+            rb.AddForce(new Vector3(0, cloudGravity, 0), ForceMode.Acceleration);
             //Ensure player doesn't endlessly float upwards
-            if(rb.velocity.y >= 0)
+            if (rb.velocity.y >= 0)
             {
                 rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(rb.velocity.x, 0, rb.velocity.z), Time.deltaTime * cloudJumpDamper);
             }
