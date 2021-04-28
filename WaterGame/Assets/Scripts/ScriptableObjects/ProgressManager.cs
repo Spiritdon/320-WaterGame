@@ -23,6 +23,17 @@ public class ProgressManager : ScriptableObject
         ReInitializeDict();
     }
 
+    public void Init()
+    {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        ReInitializeDict();
+    }
+
     public void CollectedFlavor(string flavor)
     {
         if(collectedFlavors.ContainsKey(flavor))

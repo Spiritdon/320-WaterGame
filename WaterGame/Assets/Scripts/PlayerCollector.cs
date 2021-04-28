@@ -22,6 +22,11 @@ public class PlayerCollector : MonoBehaviour
 
             if (flav != null)
             {
+                if(pm ==null)
+                {
+                    pm = ProgressManager.Instance;
+                }
+                print(pm);
                 pm.CollectedFlavor(flav.flavor);
                 Destroy(other.gameObject);
             }

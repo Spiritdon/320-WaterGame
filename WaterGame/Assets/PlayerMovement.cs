@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     float dashTime = 0.01f;
     float dashTimeElapsed = 0.0f;
 
-
+    float cameraRotTarget;
 
     //Is the player Ground pounding
     bool groundPounding = false;
@@ -199,7 +199,6 @@ public class PlayerMovement : MonoBehaviour
                 floatTimer -= Time.deltaTime;
             }
         }
-        print(floatTimer);
 
 
         if(isDashing)
@@ -331,6 +330,18 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Grounded", false);
         }
 
+
+        /* Auto Camera Rotation
+        
+        if (input.x != 0.0f)
+        {
+            cameraRotTarget = visObject.transform.eulerAngles.y;
+        }
+
+        camPivot.transform.eulerAngles =
+                 new Vector3(camPivot.transform.eulerAngles.x, Mathf.LerpAngle(camPivot.transform.eulerAngles.y, cameraRotTarget, Time.deltaTime * 2.5f), camPivot.transform.eulerAngles.z);
+
+         */
         //Reset addition force
         additionForce = Vector3.zero;
     }
