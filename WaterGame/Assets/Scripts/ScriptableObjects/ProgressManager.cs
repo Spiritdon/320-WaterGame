@@ -38,6 +38,10 @@ public class ProgressManager : ScriptableObject
             instance = this;
         }
 
+        //Reset sugar in editor
+#if UNITY_EDITOR
+        sugarCollected = 0;
+#endif
         ReInitializeDict();
     }
 
