@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7338422855528717390}
   m_Layer: 10
   m_Name: PHYS_PLAYER
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +84,7 @@ MonoBehaviour:
   sprintSys: {fileID: 8324585284405273560}
   anim: {fileID: 2516469425656181054}
   visObject: {fileID: 8324585283930779873}
+  cloudVis: {fileID: 9171501356607659175}
   camPivot: {fileID: 0}
   panel: {fileID: 0}
   trampCheckLayer:

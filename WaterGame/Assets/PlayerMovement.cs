@@ -45,8 +45,6 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("How fast the player accelerates")]
     private float acceleration = 1.0f;
 
-  
-
     private Collider collider;
     private int extraJumpCounter;
 
@@ -57,11 +55,12 @@ public class PlayerMovement : MonoBehaviour
     //Animation Properties
     public Animator anim;
     public GameObject visObject;
+    public GameObject cloudVis;
+    private Vector3 cloudBaseScale;
 
     //Camera
-    
-
     public GameObject camPivot;
+
 
     public bool GroundPounding { get => groundPounding;}
 
@@ -87,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
         collider = GetComponent<Collider>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        cloudBaseScale = cloudVis.transform.localScale;
     }
 
     public bool IsFalling()
@@ -193,10 +194,16 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //Cloud Float?
             if (Input.GetKey(KeyCode.Space) && floatTimer > 0)//allow the player to jump as long as they are pressing space and they have extra jumps
             {
-                rb.AddForce(new Vector3(0, floatForce, 0),ForceMode.Acceleration);
+                rb.AddForce(new Vector3(0, floatForce, 0), ForceMode.Acceleration);
                 floatTimer -= Time.deltaTime;
+                cloudVis.transform.localScale = Vector3.Lerp(cloudVis.transform.localScale, cloudBaseScale * 0.3f, Time.deltaTime / 3.0f);
+            }
+            else
+            {
+                cloudVis.transform.localScale = Vector3.Lerp(cloudVis.transform.localScale, cloudBaseScale, Time.deltaTime * 10f);
             }
         }
 
