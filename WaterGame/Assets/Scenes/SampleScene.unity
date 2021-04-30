@@ -362,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 195545484919687150, guid: 8277787b070f7c143a547b438d5239b6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.5249538
+      value: 4.112
       objectReference: {fileID: 0}
     - target: {fileID: 195545484919687150, guid: 8277787b070f7c143a547b438d5239b6,
         type: 3}
@@ -552,6 +552,7 @@ MonoBehaviour:
   sprintSys: {fileID: 504357141}
   anim: {fileID: 1572934776}
   visObject: {fileID: 977744428}
+  cloudVis: {fileID: 0}
   camPivot: {fileID: 140240324}
   panel: {fileID: 0}
   trampCheckLayer:
