@@ -6788,5 +6788,15 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8839383907474745850, guid: f06fac31255288c4d95fe90a29587961,
+        type: 3}
+      propertyPath: verticalClamp.x
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839383907474745850, guid: f06fac31255288c4d95fe90a29587961,
+        type: 3}
+      propertyPath: verticalClamp.y
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f06fac31255288c4d95fe90a29587961, type: 3}

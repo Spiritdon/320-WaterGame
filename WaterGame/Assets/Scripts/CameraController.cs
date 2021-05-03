@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,14 @@ public class CameraController : MonoBehaviour
     private float lastMousePosition;
     private Vector3 defaultCamera;
     private Quaternion defaultRotation;
+
+    float camXRot;
+
+    [Header("Camera Parameters")]
+    public float cameraDistance;
+    public float maxDistance;
+    public Vector2 verticalClamp;
+    RaycastHit camHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +85,27 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, playerObject.transform.position, Time.deltaTime * movementSpeed);
         RotateCamera();
     }
+
+
+    private void FixedUpdate()
+    {
+        //Prevent camera from clipping with level geometry
+        Vector3 dirToCam = characterCamera.transform.position - transform.position;
+        if(Physics.Raycast(transform.position,dirToCam,out camHit,maxDistance))
+        {
+            Vector3 hitPos = camHit.point;
+            hitPos -= dirToCam * 0.3f;
+            if(Vector3.Distance(hitPos,transform.position)> 1f)
+            {
+                characterCamera.transform.position = Vector3.Lerp(characterCamera.transform.position, hitPos, Time.deltaTime * 10f);
+            }
+        }
+        //Keep camera at max distance
+        else
+        {
+            characterCamera.transform.position = transform.position + dirToCam.normalized * maxDistance;
+        }
+    }
     private void RotateCamera()
     {
         
@@ -128,7 +158,11 @@ public class CameraController : MonoBehaviour
 
         }
         //offSet = offSet / offSetSensitivity;
-        transform.RotateAround(transform.position,Vector3.up,  Time.deltaTime * offSetSensitivity * Input.GetAxis("Mouse X"));
+        transform.RotateAround(transform.position, Vector3.up, Time.deltaTime * offSetSensitivity * Input.GetAxis("Mouse X"));
+
+        camXRot -= Time.deltaTime * offSetSensitivity * Input.GetAxis("Mouse Y");
+        camXRot = Mathf.Clamp(camXRot, verticalClamp.x, verticalClamp.y);
+        transform.eulerAngles = new Vector3(camXRot, transform.eulerAngles.y, transform.eulerAngles.z);
         //Debug.Log(offSet);
     }
 }
