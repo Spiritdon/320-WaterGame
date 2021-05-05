@@ -17,7 +17,7 @@ public class ButtonControl : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene("PlatformingTests");
+        SceneManager.LoadScene("Tutorial_Level");
         Time.timeScale = 1.0f;
     }
     public void BackToTitle()
