@@ -11,7 +11,10 @@ public class LoadAfterCutscene : MonoBehaviour
     // Update is called once per frame
     void OnDestroy()
     {
-        SceneSwitcher.Instance.LoadScene(3); //Load main level
+        if(SceneSwitcher.Instance != null)
+        {
+            SceneSwitcher.Instance.LoadScene(3); //Load main level
+        }
         //SceneManager.LoadScene(nextLevel);
     }
 }

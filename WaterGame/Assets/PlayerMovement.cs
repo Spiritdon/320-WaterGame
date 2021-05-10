@@ -69,11 +69,12 @@ public class PlayerMovement : MonoBehaviour
     bool isPanelActive;
 
     public LayerMask trampCheckLayer;
-    public LayerMask groundCheckLayer;
 
     private float floatTimer;
     private float floatForce;
     private float cloudGravity;
+
+    bool dJumpKeyUp = true;
 
     void Start()
     {
@@ -103,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()//checks if the player is touching the ground via raycasting
     {
         float distanceToGround = collider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up,distanceToGround +0.1f, groundCheckLayer);
+        return Physics.Raycast(transform.position, -Vector3.up,distanceToGround +0.1f);
         ///for this to return true their must be a intercetion between the ray and the ground 
         ///because the box collider can prevent a intercection(distance can be zero and is therefore not interceting)
         ///so the +.1f ensures when the player lands their is a intercetion  
@@ -173,8 +174,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if (PlayerState.currentPlayerState == PlayerMatterState.ICE || PlayerState.currentPlayerState == PlayerMatterState.DROP)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && extraJumpCounter != 0)//allow the player to jump as long as they are pressing space and they have extra jumps
+            if (Input.GetKeyDown(KeyCode.Space) && extraJumpCounter != 0 && dJumpKeyUp)//allow the player to jump as long as they are pressing space and they have extra jumps
             {
+                dJumpKeyUp = false;
                 StartCoroutine(JumpParticle()); //Play Particle effect
                 extraJumpCounter--;
                 float momentumY = Mathf.Abs(rb.mass * rb.velocity.y);
@@ -191,6 +193,10 @@ public class PlayerMovement : MonoBehaviour
                 {
                     rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
                 }
+            }
+            else if(Input.GetKeyUp(KeyCode.Space))
+            {
+                dJumpKeyUp = true;
             }
         }
         else
