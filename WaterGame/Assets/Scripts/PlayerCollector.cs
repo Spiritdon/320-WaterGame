@@ -18,9 +18,23 @@ public class PlayerCollector : MonoBehaviour
     public Button strawBerry;
     public Button Water;
 
-    
+    public Image cherryLock;
+    public Image grapeLock;
+    public Image lemonLock;
+    public Image orangeLock;
+    public Image melonLock;
+    public Image strawLock;
+
+
     void Start()
     {
+        cherryLock.gameObject.SetActive(true);
+        grapeLock.gameObject.SetActive(true);
+        lemonLock.gameObject.SetActive(true);
+        orangeLock.gameObject.SetActive(true);
+        melonLock.gameObject.SetActive(true);
+        strawLock.gameObject.SetActive(true);
+
         pm = ProgressManager.Instance;
         cherry.gameObject.SetActive(false);
         lemon.gameObject.SetActive(false);
@@ -51,26 +65,36 @@ public class PlayerCollector : MonoBehaviour
                 if (flav.flavor == "Cherry")
                 {
                     cherry.gameObject.SetActive(true);
+                    cherryLock.gameObject.SetActive(false);
+                    
                 }
                 else if (flav.flavor == "Grape")
                 {
                     grape.gameObject.SetActive(true);
+                    grapeLock.gameObject.SetActive(false);
+                    
                 }
                 else if (flav.flavor == "Lemon")
                 {
                     lemon.gameObject.SetActive(true);
+                    lemonLock.gameObject.SetActive(false);
+                    
                 }
                 else if (flav.flavor == "Strawberry")
                 {
                     strawBerry.gameObject.SetActive(true);
+                    strawLock.gameObject.SetActive(false);
                 }
                 else if (flav.flavor == "Watermelon")
                 {
                     waterMelon.gameObject.SetActive(true);
+                    melonLock.gameObject.SetActive(false);
                 }
                 else if (flav.flavor == "Orange")
                 {
                     orange.gameObject.SetActive(true);
+                    orangeLock.gameObject.SetActive(false);
+                    
                 }
                 Destroy(other.gameObject);
             }
