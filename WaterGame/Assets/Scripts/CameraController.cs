@@ -94,10 +94,11 @@ public class CameraController : MonoBehaviour
         if(Physics.Raycast(transform.position,dirToCam,out camHit,maxDistance))
         {
             Vector3 hitPos = camHit.point;
-            hitPos -= dirToCam * 0.3f;
+            hitPos -= dirToCam * 0.75f;
+
             if(Vector3.Distance(hitPos,transform.position)> 1f)
             {
-                characterCamera.transform.position = Vector3.Lerp(characterCamera.transform.position, hitPos, Time.deltaTime * 10f);
+                characterCamera.transform.position = Vector3.Lerp(characterCamera.transform.position, hitPos, Time.deltaTime * 20.0f);
             }
         }
         //Keep camera at max distance
@@ -145,18 +146,6 @@ public class CameraController : MonoBehaviour
             transform.position = defaultCamera;
         }
 
-        if (offSet>0)
-        {
-            transform.RotateAround(transform.position, Vector3.up, 60 * Time.deltaTime);
-        }
-        else if (offSet<0)
-        {
-            transform.RotateAround(transform.position, Vector3.up, -60 * Time.deltaTime);
-        }
-        else
-        {
-
-        }
         //offSet = offSet / offSetSensitivity;
         transform.RotateAround(transform.position, Vector3.up, Time.deltaTime * offSetSensitivity * Input.GetAxis("Mouse X"));
 
