@@ -220,6 +220,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if(PlayerState.currentPlayerState == PlayerMatterState.DROP)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+            {
+                //Dash
+                if (PlayerState.currentPlayerState == PlayerMatterState.DROP)
+                {
+                    sfx.PlaySound("dash");
+                    isDashing = true;
+                }
+            }
+        }
+
         if(isDashing)
         {
             dashTimeElapsed += Time.deltaTime;
@@ -239,15 +252,7 @@ public class PlayerMovement : MonoBehaviour
         //Disable player directional movement while in ice form
         if (PlayerState.currentPlayerState != PlayerMatterState.ICE)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-            {
-                //Dash
-                if (PlayerState.currentPlayerState == PlayerMatterState.DROP)
-                {
-                    sfx.PlaySound("dash");
-                    isDashing = true;
-                }
-            }
+
 
             ////Add the force if not zero
             //input += additionForce;
