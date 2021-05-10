@@ -20,6 +20,10 @@ public class ProgressManager : ScriptableObject
     public Dictionary<string, bool> CollectedFlavors { get => collectedFlavors; }
     public bool TutorialCompleted { get => tutorialCompleted;}
 
+
+    public delegate void CollectableHit(string type);
+    public CollectableHit flavorPickup;
+
     private void OnEnable()
     {
         if(instance == null)
@@ -50,7 +54,7 @@ public class ProgressManager : ScriptableObject
         if(collectedFlavors.ContainsKey(flavor))
         {
             collectedFlavors[flavor] = true;
-            Debug.Log("Collected " + flavor);
+            flavorPickup?.Invoke(flavor);   //Update UI
         }
     }
 

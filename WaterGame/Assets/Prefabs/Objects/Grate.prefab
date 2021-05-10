@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4434537017567705433}
   - component: {fileID: 1904552764120337811}
   - component: {fileID: 3374745918553536431}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Grate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4134645329574677377}
   - component: {fileID: 5103991555860835563}
   - component: {fileID: 8412170755694809450}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4822674871315738390}
   - component: {fileID: 2113171075537428801}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 3240958021800363007}
   - component: {fileID: 1902528506262581449}
   - component: {fileID: 6035822095574511435}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GratePlane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 6312636445937301113}
   - component: {fileID: 8214227372540511475}
   - component: {fileID: 608247800140424556}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GratePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

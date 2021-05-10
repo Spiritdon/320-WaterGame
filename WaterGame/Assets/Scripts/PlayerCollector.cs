@@ -17,6 +17,8 @@ public class PlayerCollector : MonoBehaviour
     public Button waterMelon;
     public Button strawBerry;
     public Button Water;
+
+    
     void Start()
     {
         pm = ProgressManager.Instance;
@@ -43,7 +45,8 @@ public class PlayerCollector : MonoBehaviour
                 {
                     pm = ProgressManager.Instance;
                 }
-                print(pm);
+
+
                 pm.CollectedFlavor(flav.flavor);
                 if (flav.flavor == "Cherry")
                 {

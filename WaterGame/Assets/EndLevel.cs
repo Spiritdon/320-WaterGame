@@ -18,6 +18,8 @@ public class EndLevel : MonoBehaviour
     {
         if (player.gameObject.tag == "Player")
         {
+            player.gameObject.SetActive(false);
+
             cutscene.SetActive(true);
             Destroy(cutscene, playtime);
         }

@@ -5,4 +5,9 @@ using UnityEngine;
 public class FlavorPickup : MonoBehaviour
 {
     public string flavor;
+
+    private void Start()
+    {
+        
+    }
 }

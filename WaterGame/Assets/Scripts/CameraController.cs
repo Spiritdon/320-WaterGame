@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     private Quaternion defaultRotation;
 
     float camXRot;
-
+    public LayerMask camColMask;
     [Header("Camera Parameters")]
     public float cameraDistance;
     public float maxDistance;
@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour
     {
         //Prevent camera from clipping with level geometry
         Vector3 dirToCam = characterCamera.transform.position - transform.position;
-        if(Physics.Raycast(transform.position,dirToCam,out camHit,maxDistance))
+        if(Physics.Raycast(transform.position,dirToCam,out camHit,maxDistance, camColMask))
         {
             Vector3 hitPos = camHit.point;
             hitPos -= dirToCam * 0.75f;

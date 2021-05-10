@@ -63,7 +63,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 10039
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -130,6 +130,9 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   characterCamera: {fileID: 8839383907224052047}
   movementSpeed: 9
+  camColMask:
+    serializedVersion: 2
+    m_Bits: 7991
   cameraDistance: 5
   maxDistance: 5
   verticalClamp: {x: -10, y: 49}
