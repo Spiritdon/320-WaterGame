@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1217982238}
   trigger: {fileID: 1217982239}
   panel: {fileID: 141159049}
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1911793326}
   trigger: {fileID: 1911793327}
   panel: {fileID: 1720777171}
@@ -3334,7 +3334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1763456601}
   trigger: {fileID: 1763456602}
   panel: {fileID: 136150948}
@@ -6815,7 +6815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1650389354}
   trigger: {fileID: 1650389355}
   panel: {fileID: 154690353}
@@ -14297,7 +14297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1654545827}
   trigger: {fileID: 1654545828}
   panel: {fileID: 301157158}
@@ -15157,7 +15157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1887811923}
   trigger: {fileID: 1887811924}
   panel: {fileID: 98730695}
@@ -16333,7 +16333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1307197414}
   trigger: {fileID: 1307197415}
   panel: {fileID: 562906142}
@@ -17214,7 +17214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 378892885}
   trigger: {fileID: 378892886}
   panel: {fileID: 1690978119}
@@ -17325,7 +17325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 715667085}
   trigger: {fileID: 715667086}
   panel: {fileID: 1258402509}
@@ -17860,7 +17860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 651027218}
   trigger: {fileID: 651027219}
   panel: {fileID: 1744159757}
@@ -18481,7 +18481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 1803425907}
   trigger: {fileID: 1803425908}
   panel: {fileID: 301904563}
@@ -19116,7 +19116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 641234618}
   trigger: {fileID: 641234619}
   panel: {fileID: 1075362274}
@@ -20043,6 +20043,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3071552128318538636, guid: 4949c77a9c60ce74caaf0d574c9ce527,
     type: 3}
   m_PrefabInstance: {fileID: 1722505399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1736173437 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 8885745868899405462, guid: 009d1145e10a17a47b77c0649553196e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1627525816}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1739807635
 PrefabInstance:
@@ -22963,7 +22969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef8ea08c7826045b223105f75d5946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2115304671}
+  player: {fileID: 1736173437}
   triggerEvent: {fileID: 822687131}
   trigger: {fileID: 822687132}
   panel: {fileID: 1598865412}
@@ -24578,12 +24584,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3071552128318538636, guid: 4949c77a9c60ce74caaf0d574c9ce527,
     type: 3}
   m_PrefabInstance: {fileID: 2114344989}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &2115304671 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 6337158456232496830, guid: 009d1145e10a17a47b77c0649553196e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1627525816}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2115304673 stripped
 MonoBehaviour:

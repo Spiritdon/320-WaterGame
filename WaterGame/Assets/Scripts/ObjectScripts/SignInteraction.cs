@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SignInteraction : MonoBehaviour
 {
-    public SphereCollider player;
+    public Collider player;
     public TriggerEvent triggerEvent;
     public BoxCollider trigger;
     public GameObject panel;
