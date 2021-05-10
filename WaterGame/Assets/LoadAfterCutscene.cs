@@ -7,15 +7,11 @@ public class LoadAfterCutscene : MonoBehaviour
 {
     public string nextLevel;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void OnDestroy()
     {
-        SceneManager.LoadScene(nextLevel);
+        SceneSwitcher.Instance.LoadScene(3); //Load main level
+        //SceneManager.LoadScene(nextLevel);
     }
 }

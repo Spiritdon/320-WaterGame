@@ -17,12 +17,12 @@ public class ButtonControl : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene("Tutorial_Level");
+        SceneSwitcher.Instance.LoadScene(2);
         Time.timeScale = 1.0f;
     }
     public void BackToTitle()
     {
-        SceneManager.LoadScene("Title");
+        SceneSwitcher.Instance.LoadScene(1);
     }
     public void QuitGame()
     {
