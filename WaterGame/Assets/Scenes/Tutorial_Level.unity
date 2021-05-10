@@ -10192,6 +10192,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 767793104}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &767793106 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8839383907474745850, guid: f06fac31255288c4d95fe90a29587961,
+    type: 3}
+  m_PrefabInstance: {fileID: 767793104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767793105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86df4d88fb5a894fa7672c22c9a1243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &773200943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20868,6 +20880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 1648290756}
   playtime: 15
+  camCont: {fileID: 767793106}
 --- !u!1001 &1781336700
 PrefabInstance:
   m_ObjectHideFlags: 0

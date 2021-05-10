@@ -30,6 +30,10 @@ public class trampInteraction : MonoBehaviour
         {
             if (other.CompareTag("Player") && PlayerState.currentPlayerState == PlayerMatterState.ICE)
             {
+                if(player == null)
+                {
+                    player = other.GetComponent<Rigidbody>();
+                }
                 if (other.GetComponent<PlayerMovement>().IsTrampHit())
                 {
                     if (!trampActive)

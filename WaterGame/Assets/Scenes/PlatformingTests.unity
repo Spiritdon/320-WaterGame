@@ -11557,6 +11557,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 260630450}
     m_Modifications:
+    - target: {fileID: 1460509095390174395, guid: cb85802c5c61e58428a0d4c632a7cba7,
+        type: 3}
+      propertyPath: isActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3811600670079804983, guid: cb85802c5c61e58428a0d4c632a7cba7,
         type: 3}
       propertyPath: m_Name
@@ -15986,6 +15991,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 260630450}
     m_Modifications:
+    - target: {fileID: 1460509095390174395, guid: cb85802c5c61e58428a0d4c632a7cba7,
+        type: 3}
+      propertyPath: isActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3811600670079804983, guid: cb85802c5c61e58428a0d4c632a7cba7,
         type: 3}
       propertyPath: m_Name
@@ -24124,6 +24134,11 @@ PrefabInstance:
       propertyPath: panel
       value: 
       objectReference: {fileID: 617602936}
+    - target: {fileID: 8580368967552902887, guid: 009d1145e10a17a47b77c0649553196e,
+        type: 3}
+      propertyPath: groundCheckLayer.m_Bits
+      value: 15159
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009d1145e10a17a47b77c0649553196e, type: 3}
 --- !u!1001 &2047994024

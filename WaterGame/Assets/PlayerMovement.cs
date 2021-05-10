@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     bool isPanelActive;
 
     public LayerMask trampCheckLayer;
+    public LayerMask groundCheckLayer;
 
     private float floatTimer;
     private float floatForce;
@@ -102,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()//checks if the player is touching the ground via raycasting
     {
         float distanceToGround = collider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up,distanceToGround +0.1f);
+        return Physics.Raycast(transform.position, -Vector3.up,distanceToGround +0.1f, groundCheckLayer);
         ///for this to return true their must be a intercetion between the ray and the ground 
         ///because the box collider can prevent a intercection(distance can be zero and is therefore not interceting)
         ///so the +.1f ensures when the player lands their is a intercetion  
@@ -168,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded())//if the player is touching the ground replenish his double jump
         {
             extraJumpCounter = 1;
-            floatTimer = 3;
+            floatTimer = 3;   
         }
         if (PlayerState.currentPlayerState == PlayerMatterState.ICE || PlayerState.currentPlayerState == PlayerMatterState.DROP)
         {

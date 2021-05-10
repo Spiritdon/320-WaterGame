@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1583828352531803823}
   - component: {fileID: 6857191234833474815}
-  - component: {fileID: 6337158456232496830}
   - component: {fileID: 8580368967552902887}
   - component: {fileID: 7338422855528717390}
+  - component: {fileID: 8885745868899405462}
   m_Layer: 10
   m_Name: PHYS_PLAYER
   m_TagString: Player
@@ -50,19 +50,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!135 &6337158456232496830
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3554730957490150379}
-  m_Material: {fileID: 13400000, guid: 9bb1d9712ca3a7b40ae2ac4d63b2f6fb, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8580368967552902887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +77,9 @@ MonoBehaviour:
   trampCheckLayer:
     serializedVersion: 2
     m_Bits: 512
+  groundCheckLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7338422855528717390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +100,20 @@ MonoBehaviour:
   waterMelon: {fileID: 0}
   strawBerry: {fileID: 0}
   Water: {fileID: 0}
+--- !u!136 &8885745868899405462
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554730957490150379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 0.95
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8324585282612249216
 GameObject:
   m_ObjectHideFlags: 0
@@ -14726,7 +14730,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b58d6997e39a7434fb23a1f98b2febcd, type: 2}
+      objectReference: {fileID: 2100000, guid: 702c3032883caae439eaa3c72c4b5e90, type: 2}
     - target: {fileID: 919132149155446097, guid: 61a16bb63f72be84d9fc7e3b198d177f,
         type: 3}
       propertyPath: m_Name
@@ -14837,7 +14841,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b58d6997e39a7434fb23a1f98b2febcd, type: 2}
+      objectReference: {fileID: 2100000, guid: 96df815a55a4ef742843950a16ba7f7d, type: 2}
     - target: {fileID: 919132149155446097, guid: c4923d950f1015940970ab7e3a3409c1,
         type: 3}
       propertyPath: m_Name
@@ -15003,6 +15007,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d0a11c888b8cd540a696882c5587ee9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1055767929649446817, guid: 8d0a11c888b8cd540a696882c5587ee9,
         type: 3}
