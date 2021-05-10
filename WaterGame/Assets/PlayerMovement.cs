@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     private Collider collider;
     private int extraJumpCounter;
 
+    public PlayerSFX sfx;
+
     //Particles
     public ParticleSystem jumpSys;
     public ParticleSystem sprintSys;
@@ -172,13 +174,16 @@ public class PlayerMovement : MonoBehaviour
             extraJumpCounter = 1;
             floatTimer = 3;   
         }
+
+
         if (PlayerState.currentPlayerState == PlayerMatterState.ICE || PlayerState.currentPlayerState == PlayerMatterState.DROP)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && extraJumpCounter != 0 && dJumpKeyUp)//allow the player to jump as long as they are pressing space and they have extra jumps
+            if (Input.GetKeyDown(KeyCode.Space) && extraJumpCounter > 0 && dJumpKeyUp)//allow the player to jump as long as they are pressing space and they have extra jumps
             {
                 dJumpKeyUp = false;
                 StartCoroutine(JumpParticle()); //Play Particle effect
                 extraJumpCounter--;
+
                 float momentumY = Mathf.Abs(rb.mass * rb.velocity.y);
                 //this calculates the momentum (Momentum = Max * Velocity) 
                 //The Force of Momentum is (Force of Momentum = Momentum/Deltatime) 
@@ -192,6 +197,7 @@ public class PlayerMovement : MonoBehaviour
                 else//Other Wise Jump Normally
                 {
                     rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                    sfx.PlaySound("jump");
                 }
             }
             else if(Input.GetKeyUp(KeyCode.Space))
@@ -213,7 +219,6 @@ public class PlayerMovement : MonoBehaviour
                 cloudVis.transform.localScale = Vector3.Lerp(cloudVis.transform.localScale, cloudBaseScale, Time.deltaTime * 10f);
             }
         }
-
 
         if(isDashing)
         {
@@ -239,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
                 //Dash
                 if (PlayerState.currentPlayerState == PlayerMatterState.DROP)
                 {
+                    sfx.PlaySound("dash");
                     isDashing = true;
                 }
             }

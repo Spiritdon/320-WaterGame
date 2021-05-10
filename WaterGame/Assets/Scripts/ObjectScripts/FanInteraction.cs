@@ -64,16 +64,14 @@ public class FanInteraction : MonoBehaviour,ButtonTriggered
     //Button interface implmentation
     public void ButtonActivated()
     {
-        isActive = true;
-        particles.Play();
-        anim.SetBool("Active", isActive);
+        isActive = !isActive;
+        StateChanged();
     }
 
     public void ButtonReleased()
     {
-        isActive = false;
-        particles.Stop();
-        anim.SetBool("Active", isActive);
+        isActive = !isActive;
+        StateChanged();
     }
 
     public void LinkButtons()
@@ -103,5 +101,21 @@ public class FanInteraction : MonoBehaviour,ButtonTriggered
             connectedButtons[i].buttonActivated -= ButtonActivated;
             connectedButtons[i].buttonReleased  -= ButtonReleased;
         }
+    }
+
+    void StateChanged()
+    {
+        if (isActive)
+        {
+            particles.Play();
+            anim.SetBool("Active", isActive);
+        }
+        else
+        {
+            particles.Stop();
+            anim.SetBool("Active", isActive);
+        }
+
+
     }
 }
