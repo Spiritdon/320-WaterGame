@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     Vector3 relativeVel = Vector3.zero;
-
 
     //Dash stuff
     [SerializeField] float dashCooldown = 1.0f;
@@ -71,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
     bool isPanelActive;
 
     public LayerMask trampCheckLayer;
+    public LayerMask groundCheck;
+    RaycastHit rHit;
 
     private float floatTimer;
     private float floatForce;
@@ -175,6 +178,7 @@ public class PlayerMovement : MonoBehaviour
             floatTimer = 3;   
         }
 
+      
 
         if (PlayerState.currentPlayerState == PlayerMatterState.ICE || PlayerState.currentPlayerState == PlayerMatterState.DROP)
         {
@@ -225,27 +229,27 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
             {
                 //Dash
-                if (PlayerState.currentPlayerState == PlayerMatterState.DROP)
-                {
-                    sfx.PlaySound("dash");
-                    isDashing = true;
-                }
-            }
-        }
-
-        if(isDashing)
-        {
-            dashTimeElapsed += Time.deltaTime;
-
-            if (dashTimeElapsed <= dashTime)
-            {
-                InfluenceVelocity(visObject.transform.forward * 100f);
+                sfx.PlaySound("dash");
+                isDashing = true;
+                rb.velocity = Vector3.zero;
             }
             else
             {
-                isDashing = false;
-                dashTimeElapsed = 0.0f;
-                StartCoroutine(SprintCooldown());
+                if (isDashing)
+                {
+                    dashTimeElapsed += Time.deltaTime;
+
+                    if (dashTimeElapsed <= dashTime)
+                    {
+                        additionForce += visObject.transform.forward * 100f;
+                    }
+                    else
+                    {
+                        dashTimeElapsed = 0.0f;
+                        StartCoroutine(SprintCooldown());
+                        isDashing = false;
+                    }
+                }
             }
         }
        
@@ -262,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Increase player speed gradually
                 vel = Vector3.Lerp(vel, input, Time.deltaTime * acceleration);
+                rb.velocity = new Vector3(0.0f, rb.velocity.y, 0.0f);
             }
             else 
             {

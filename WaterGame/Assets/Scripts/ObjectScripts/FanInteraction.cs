@@ -7,6 +7,7 @@ public class FanInteraction : MonoBehaviour,ButtonTriggered
     [Header("References")]
     [SerializeField] Transform influenceDirection;
     [SerializeField] private TriggerEvent colTrigger;
+    [SerializeField] private AudioSource soundSource;
 
     [Header("Parameters")]
     [SerializeField] float fanForce = 1.0f;
@@ -26,12 +27,7 @@ public class FanInteraction : MonoBehaviour,ButtonTriggered
         colTrigger.triggerEvent += TriggeredEvent;
         LinkButtons();
 
-        //Set initial values
-        if(isActive)
-        {
-            particles.Play();
-            anim.SetBool("Active", isActive);
-        }
+        StateChanged();
     }
 
     private void OnDestroy()
@@ -109,11 +105,13 @@ public class FanInteraction : MonoBehaviour,ButtonTriggered
         {
             particles.Play();
             anim.SetBool("Active", isActive);
+            soundSource.Play();
         }
         else
         {
             particles.Stop();
             anim.SetBool("Active", isActive);
+            soundSource.Stop();
         }
 
 
