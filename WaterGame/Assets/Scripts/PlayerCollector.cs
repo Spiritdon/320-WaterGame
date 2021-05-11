@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerCollector : MonoBehaviour
 {
-    //Progress manager
-    ProgressManager pm;
+    
     public Text sugarCounter;
     // Start is called before the first frame update
 
@@ -35,7 +34,6 @@ public class PlayerCollector : MonoBehaviour
         melonLock.gameObject.SetActive(true);
         strawLock.gameObject.SetActive(true);
 
-        pm = ProgressManager.Instance;
         cherry.gameObject.SetActive(false);
         lemon.gameObject.SetActive(false);
         orange.gameObject.SetActive(false);
@@ -55,13 +53,9 @@ public class PlayerCollector : MonoBehaviour
 
             if (flav != null)
             {
-                if(pm ==null)
-                {
-                    pm = ProgressManager.Instance;
-                }
 
 
-                pm.CollectedFlavor(flav.flavor);
+                ProgressManager.Instance.CollectedFlavor(flav.flavor);
                 if (flav.flavor == "Cherry")
                 {
                     cherry.gameObject.SetActive(true);
@@ -104,8 +98,8 @@ public class PlayerCollector : MonoBehaviour
         //Sugar collision
         else if (other.CompareTag("SugarCOL"))
         {
-            pm.sugarCollected++;
-            sugarCounter.text = pm.sugarCollected.ToString();
+            ProgressManager.Instance.sugarCollected++;
+            sugarCounter.text = ProgressManager.Instance.sugarCollected.ToString();
             Destroy(other.gameObject);
         }
     }
