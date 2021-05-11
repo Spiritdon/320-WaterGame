@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadAfterCutscene : MonoBehaviour
 {
-    public string nextLevel;
+    // string nextLevel;
+    public int sceneIndex;
 
 
     // Update is called once per frame
@@ -13,7 +14,7 @@ public class LoadAfterCutscene : MonoBehaviour
     {
         if(SceneSwitcher.Instance != null)
         {
-            SceneSwitcher.Instance.LoadScene(3); //Load main level
+            SceneSwitcher.Instance.LoadScene(sceneIndex); //Load main level
         }
         //SceneManager.LoadScene(nextLevel);
     }
