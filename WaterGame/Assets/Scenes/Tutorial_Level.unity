@@ -19773,7 +19773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cce4547a324ad347931c1ca0d8ecc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: PlatformingTests
+  sceneIndex: 3
 --- !u!1 &1650389352
 GameObject:
   m_ObjectHideFlags: 0
@@ -21363,7 +21363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1764854246
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21710,7 +21710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: {fileID: 1648290756}
-  playtime: 15
+  playtime: 14
   camCont: {fileID: 767793106}
 --- !u!1001 &1781336700
 PrefabInstance:
