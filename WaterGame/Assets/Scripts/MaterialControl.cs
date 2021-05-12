@@ -12,15 +12,13 @@ public class MaterialControl : MonoBehaviour
     public Renderer iceRender;
     public Renderer cloudRender;
     private string currentColor = "Water";
-    List<int> colors;
     Dictionary<string, bool> collectedFla;
-    bool isTrue;
     List<bool> flavorBool;
+    ProgressManager pm;
     private void Start()
     {
-        colors = new List<int>();
-        colors.Add(0);
-        collectedFla = ProgressManager.Instance.CollectedFlavors;
+        pm = ProgressManager.Instance;
+        collectedFla = pm.CollectedFlavors;
 
         flavorBool = new List<bool>();
         foreach (bool flavorValue in collectedFla.Values)
