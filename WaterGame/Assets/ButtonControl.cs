@@ -28,4 +28,8 @@ public class ButtonControl : MonoBehaviour
     {
         Application.Quit();
     }
+    public void ChangeColor()
+    {
+        
+    }
 }

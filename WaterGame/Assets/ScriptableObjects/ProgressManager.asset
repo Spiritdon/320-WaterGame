@@ -15,4 +15,8 @@ MonoBehaviour:
   flavors:
   - Grape
   - Cherry
+  - Lemon
+  - Orange
+  - Watermelon
+  - Strawberry
   sugarCollected: 0
