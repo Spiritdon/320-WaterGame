@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4689360746039407192}
   - component: {fileID: 8555765436721528317}
   - component: {fileID: 5861672531928877367}
+  - component: {fileID: 3224111832603155666}
+  - component: {fileID: 6437890893724728714}
   m_Layer: 0
   m_Name: IcicleBag
   m_TagString: Untagged
@@ -79,3 +81,30 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3224111832603155666
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357071804272126178}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.73025596, y: 0.5736289, z: 0.70080924}
+  m_Center: {x: -0.0033573508, y: 1.54387, z: 0.003934443}
+--- !u!136 &6437890893724728714
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357071804272126178}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.75548816
+  m_Height: 2.454557
+  m_Direction: 1
+  m_Center: {x: -0.033629954, y: 0.21471858, z: 0.014246583}
