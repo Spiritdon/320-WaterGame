@@ -11,14 +11,13 @@ public class MaterialControl : MonoBehaviour
     public Renderer dropletRender;
     public Renderer iceRender;
     public Renderer cloudRender;
-    private string currentColor;
+    private string currentColor = "Water";
     List<int> colors;
     Dictionary<string, bool> collectedFla;
     bool isTrue;
     List<bool> flavorBool;
     private void Start()
     {
-        currentColor = "Water";
         colors = new List<int>();
         colors.Add(0);
         collectedFla = ProgressManager.Instance.CollectedFlavors;

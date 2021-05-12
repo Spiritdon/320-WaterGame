@@ -2566,7 +2566,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 163788539}
-        m_MethodName: waterMelonClicked
+        m_MethodName: swapRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3327,6 +3327,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 213656138}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &213728382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 213728384}
+  - component: {fileID: 213728383}
+  m_Layer: 0
+  m_Name: MaterialContr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &213728383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213728382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropletRender: {fileID: 1825412834}
+  iceRender: {fileID: 22215983}
+  cloudRender: {fileID: 690945615}
+--- !u!4 &213728384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213728382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 64.50179, y: 154.16518, z: 168.8161}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &214765868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4270,7 +4316,6 @@ GameObject:
   - component: {fileID: 258456882}
   - component: {fileID: 258456881}
   - component: {fileID: 258456880}
-  - component: {fileID: 258456883}
   m_Layer: 5
   m_Name: CherryButton
   m_TagString: Untagged
@@ -4340,7 +4385,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 258456883}
+      - m_Target: {fileID: 213728383}
         m_MethodName: cherryClicked
         m_Mode: 1
         m_Arguments:
@@ -4388,21 +4433,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258456878}
   m_CullTransparentMesh: 0
---- !u!114 &258456883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258456878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropletRender: {fileID: 1825412834}
-  iceRender: {fileID: 22215983}
-  cloudRender: {fileID: 690945615}
 --- !u!114 &268253615 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 572882976401020604, guid: 581ae229b5274b445b0d19c34a0d1d4f,
@@ -5271,7 +5301,6 @@ GameObject:
   - component: {fileID: 320467449}
   - component: {fileID: 320467448}
   - component: {fileID: 320467447}
-  - component: {fileID: 320467450}
   m_Layer: 5
   m_Name: WaterButton
   m_TagString: Untagged
@@ -5341,7 +5370,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 320467450}
+      - m_Target: {fileID: 213728383}
         m_MethodName: waterClicked
         m_Mode: 1
         m_Arguments:
@@ -5389,21 +5418,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320467445}
   m_CullTransparentMesh: 0
---- !u!114 &320467450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320467445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropletRender: {fileID: 1825412834}
-  iceRender: {fileID: 22215983}
-  cloudRender: {fileID: 690945615}
 --- !u!1001 &329536439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8186,7 +8200,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 582721558}
-        m_MethodName: waterMelonClicked
+        m_MethodName: swapLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8749,7 +8763,6 @@ GameObject:
   - component: {fileID: 647075152}
   - component: {fileID: 647075151}
   - component: {fileID: 647075150}
-  - component: {fileID: 647075153}
   m_Layer: 5
   m_Name: OrangeButton
   m_TagString: Untagged
@@ -8819,7 +8832,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 647075153}
+      - m_Target: {fileID: 213728383}
         m_MethodName: orangeClicked
         m_Mode: 1
         m_Arguments:
@@ -8867,21 +8880,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647075148}
   m_CullTransparentMesh: 0
---- !u!114 &647075153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 647075148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropletRender: {fileID: 1825412834}
-  iceRender: {fileID: 22215983}
-  cloudRender: {fileID: 690945615}
 --- !u!1001 &652110544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9059,7 +9057,6 @@ GameObject:
   - component: {fileID: 663885601}
   - component: {fileID: 663885600}
   - component: {fileID: 663885599}
-  - component: {fileID: 663885602}
   m_Layer: 5
   m_Name: LemonButton
   m_TagString: Untagged
@@ -9129,7 +9126,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 663885602}
+      - m_Target: {fileID: 213728383}
         m_MethodName: lemonClicked
         m_Mode: 1
         m_Arguments:
@@ -9177,21 +9174,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663885597}
   m_CullTransparentMesh: 0
---- !u!114 &663885602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663885597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropletRender: {fileID: 1825412834}
-  iceRender: {fileID: 22215983}
-  cloudRender: {fileID: 690945615}
 --- !u!1001 &665079361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11656,7 +11638,6 @@ GameObject:
   - component: {fileID: 886591921}
   - component: {fileID: 886591920}
   - component: {fileID: 886591919}
-  - component: {fileID: 886591922}
   m_Layer: 5
   m_Name: WatermelonButton
   m_TagString: Untagged
@@ -11726,7 +11707,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 886591922}
+      - m_Target: {fileID: 213728383}
         m_MethodName: waterMelonClicked
         m_Mode: 1
         m_Arguments:
@@ -11774,21 +11755,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886591917}
   m_CullTransparentMesh: 0
---- !u!114 &886591922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 886591917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropletRender: {fileID: 1825412834}
-  iceRender: {fileID: 22215983}
-  cloudRender: {fileID: 690945615}
 --- !u!1 &888911338
 GameObject:
   m_ObjectHideFlags: 0
@@ -15007,7 +14973,6 @@ GameObject:
   - component: {fileID: 1213181177}
   - component: {fileID: 1213181176}
   - component: {fileID: 1213181175}
-  - component: {fileID: 1213181178}
   m_Layer: 5
   m_Name: StrawberryButton
   m_TagString: Untagged
@@ -15077,7 +15042,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213181178}
+      - m_Target: {fileID: 213728383}
         m_MethodName: strawBerryClicked
         m_Mode: 1
         m_Arguments:
@@ -15125,21 +15090,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213181173}
   m_CullTransparentMesh: 0
---- !u!114 &1213181178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213181173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropletRender: {fileID: 1825412834}
-  iceRender: {fileID: 22215983}
-  cloudRender: {fileID: 690945615}
 --- !u!1001 &1232278793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24004,7 +23954,6 @@ GameObject:
   - component: {fileID: 2049705923}
   - component: {fileID: 2049705922}
   - component: {fileID: 2049705921}
-  - component: {fileID: 2049705924}
   m_Layer: 5
   m_Name: GrapeButton
   m_TagString: Untagged
@@ -24074,7 +24023,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2049705924}
+      - m_Target: {fileID: 213728383}
         m_MethodName: grapeClicked
         m_Mode: 1
         m_Arguments:
@@ -24122,21 +24071,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049705919}
   m_CullTransparentMesh: 0
---- !u!114 &2049705924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049705919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5a6e60d97710044b6f333447dd236d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropletRender: {fileID: 1825412834}
-  iceRender: {fileID: 22215983}
-  cloudRender: {fileID: 690945615}
 --- !u!1001 &2071753298
 PrefabInstance:
   m_ObjectHideFlags: 0
