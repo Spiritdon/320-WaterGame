@@ -39,7 +39,15 @@ public class SceneSwitcher : MonoBehaviour
     /// <returns></returns>
     IEnumerator SceneLoading(int index)
     {
-        loadingScreenUI.SetActive(true);
+        //Make loading scene the active scene
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+
+        if(loadingScreenUI != null)
+        {
+            loadingScreenUI.SetActive(true);   //Hide loading screen
+        }
+       
+
         //Unload any currently active scene
         if (currentlyLoadedScene != 0)
         {
@@ -51,8 +59,8 @@ public class SceneSwitcher : MonoBehaviour
 
             currentlyLoadedScene = 0;
         }
-        //Make loading scene the active scene
-        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+
+      
        
 
         //Get scene to load and start loading asynchronously
@@ -64,7 +72,10 @@ public class SceneSwitcher : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        loadingScreenUI.SetActive(false);   //Hide loading screen
+        if (loadingScreenUI != null)
+        {
+            loadingScreenUI.SetActive(false);   //Hide loading screen
+        }
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));   //Make this the active screen
         currentlyLoadedScene = index;   //Track the loaded scene
     }

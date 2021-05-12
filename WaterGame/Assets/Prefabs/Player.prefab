@@ -5310,7 +5310,7 @@ MonoBehaviour:
     m_Bits: 4919
   dashMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1847
 --- !u!114 &8342817178344440070
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class MaterialControl : MonoBehaviour
     // Start is called before the first frame update
 
     public Renderer dropletRender;
+    public Renderer previewRender;
     public Renderer iceRender;
     public Renderer cloudRender;
     private string currentColor = "Water";
@@ -31,6 +32,7 @@ public class MaterialControl : MonoBehaviour
         dropletRender.material.mainTextureOffset = new Vector2(3.4f, 0.55f);
         iceRender.material.mainTextureOffset = new Vector2(0.25f, 1.54f);//
         cloudRender.material.mainTextureOffset = new Vector2(0.25f, 0.565f);//
+        previewRender.material.mainTextureOffset = new Vector2(3.4f, 0.55f);
         currentColor = "Cherry";
     }
     public void grapeClicked()
@@ -38,6 +40,7 @@ public class MaterialControl : MonoBehaviour
         dropletRender.material.mainTextureOffset = new Vector2(0.0f, 0.2f);
         iceRender.material.mainTextureOffset = new Vector2(0.12f, 1.53f);//
         cloudRender.material.mainTextureOffset = new Vector2(0.34f, 0.565f);//
+        previewRender.material.mainTextureOffset = new Vector2(0.0f, 0.2f);
         currentColor = "Grape";
     }
     public void lemonClicked()
@@ -45,6 +48,7 @@ public class MaterialControl : MonoBehaviour
         dropletRender.material.mainTextureOffset = new Vector2(1.28f, -2.8f);
         iceRender.material.mainTextureOffset = new Vector2(-0.13f, 1.18f);//
         cloudRender.material.mainTextureOffset = new Vector2(0.14f, 0.19f);//
+        previewRender.material.mainTextureOffset = new Vector2(1.28f, -2.8f);
         currentColor = "Lemon";
     }
     public void orangeClicked()
@@ -52,6 +56,7 @@ public class MaterialControl : MonoBehaviour
         dropletRender.material.mainTextureOffset = new Vector2(0.24f, -2.45f);
         iceRender.material.mainTextureOffset = new Vector2(-0.13f, 1.54f);//
         cloudRender.material.mainTextureOffset = new Vector2(0.25f, 0.19f);//
+        previewRender.material.mainTextureOffset = new Vector2(0.24f, -2.45f);
         currentColor = "Orange";
     }
     public void waterMelonClicked()
@@ -59,6 +64,7 @@ public class MaterialControl : MonoBehaviour
         dropletRender.material.mainTextureOffset = new Vector2(0.0f, 0.38f);
         iceRender.material.mainTextureOffset = new Vector2(0.51f, 1.54f);//
         cloudRender.material.mainTextureOffset = new Vector2(-0.15f, 0.565f);//
+        previewRender.material.mainTextureOffset = new Vector2(0.0f, 0.38f);
         currentColor = "Watermelon";
     }
     public void strawBerryClicked()
@@ -66,6 +72,7 @@ public class MaterialControl : MonoBehaviour
         dropletRender.material.mainTextureOffset = new Vector2(0.85f, -2.45f);
         iceRender.material.mainTextureOffset = new Vector2(0.0f, 1.54f);//
         cloudRender.material.mainTextureOffset = new Vector2(-0.49f, 0.565f);//
+        previewRender.material.mainTextureOffset = new Vector2(0.85f, -2.45f);
         currentColor = "Strawberry";
     }
     public void waterClicked()
@@ -73,6 +80,7 @@ public class MaterialControl : MonoBehaviour
         dropletRender.material.mainTextureOffset = new Vector2(0.0f, 0.0f);
         iceRender.material.mainTextureOffset = new Vector2(0.0f, 0.0f);
         cloudRender.material.mainTextureOffset = new Vector2(0.0f, 0.0f);
+        previewRender.material.mainTextureOffset = new Vector2(0.0f, 0.0f);
         currentColor = "Water";
     }
 
