@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class MaterialControl : MonoBehaviour
 {
@@ -16,6 +15,8 @@ public class MaterialControl : MonoBehaviour
     Dictionary<string, bool> collectedFla;
     List<bool> flavorBool;
     ProgressManager pm;
+    public GameObject playerPreviewModel;
+    private Vector3 rotationAxis; 
     private void Start()
     {
         pm = ProgressManager.Instance;
@@ -26,6 +27,7 @@ public class MaterialControl : MonoBehaviour
         {
             flavorBool.Add(flavorValue);
         }
+        rotationAxis = playerPreviewModel.transform.up;
     }
     public void cherryClicked()
     {
@@ -86,7 +88,9 @@ public class MaterialControl : MonoBehaviour
 
     public void swapRight()
     {
-
+        
+        playerPreviewModel.transform.Rotate(rotationAxis,-30.0f);
+        /*
         switch (currentColor)
         {
             case "Water":
@@ -135,10 +139,12 @@ public class MaterialControl : MonoBehaviour
                 waterClicked();
                 break;
         }
-        
+        */
     }
     public void swapLeft()
     {
+        playerPreviewModel.transform.Rotate(rotationAxis, 30.0f);
+        /*
         switch (currentColor)
         {
             case "Cherry":
@@ -188,7 +194,7 @@ public class MaterialControl : MonoBehaviour
                 break;
 
         }
-
+        */
 
 
     }
