@@ -5,31 +5,17 @@ using UnityEngine.Audio;
 
 public class OptionsController : MonoBehaviour
 {
-
-
     public AudioMixer masterMixer;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void ChangeMasterVolume(float vol)
     {
-        float finalVol = Mathf.Lerp(-50, 10f, vol);
-        masterMixer.SetFloat("ooga", finalVol);
+        float finalVol = Mathf.Lerp(-80, 0.0f, vol);
+        masterMixer.SetFloat("Master_Vol", finalVol);
     }
 
     public void ChangeMusicVolume(float vol)
     {
-        float finalVol = Mathf.Lerp(-50, 10f, vol);
-        masterMixer.SetFloat("BG_Music", finalVol);
+        float finalVol = Mathf.Lerp(-80.0f, 0f, vol);
+        masterMixer.SetFloat("Music_Vol", finalVol);
     }
 }

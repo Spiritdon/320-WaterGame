@@ -16,10 +16,14 @@ public class PlayerState : MonoBehaviour
     public GameObject iceModel;
     public ParticleSystem changeParticle;
 
+    public AudioSource changeSfx;
+
     // Start is called before the first frame update
     void Start()
     {
-        UpdatePlayerModel();
+        dropModel.SetActive(true);
+        iceModel.SetActive(false);
+        cloudModel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -65,6 +69,9 @@ public class PlayerState : MonoBehaviour
     private void UpdatePlayerModel()
     {
         changeParticle.Play();
+
+        changeSfx.pitch = Random.Range(0.8f, 1.2f);
+        changeSfx.Play();
 
         switch (currentPlayerState)
         {
