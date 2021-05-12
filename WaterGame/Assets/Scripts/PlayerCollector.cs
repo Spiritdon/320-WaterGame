@@ -23,6 +23,9 @@ public class PlayerCollector : MonoBehaviour
     public Image orangeLock;
     public Image melonLock;
     public Image strawLock;
+
+
+    public AudioSource pickupAud;
     void Start()
     {
         cherryLock.gameObject.SetActive(true);
@@ -89,6 +92,9 @@ public class PlayerCollector : MonoBehaviour
                     
                 }
                 Destroy(other.gameObject);
+
+                pickupAud.pitch = Random.Range(0.8f, 1.2f);
+                pickupAud.Play();
             }
             
         }
@@ -96,6 +102,8 @@ public class PlayerCollector : MonoBehaviour
         //Sugar collision
         else if (other.CompareTag("SugarCOL"))
         {
+            pickupAud.pitch = Random.Range(0.8f, 1.2f);
+            pickupAud.Play();
             ProgressManager.Instance.sugarCollected++;
             sugarCounter.text = ProgressManager.Instance.sugarCollected.ToString();
             Destroy(other.gameObject);
