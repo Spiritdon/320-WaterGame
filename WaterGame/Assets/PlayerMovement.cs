@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     private float acceleration = 1.0f;
 
     private Collider collider;
-    private int extraJumpCounter;
 
     public PlayerSFX sfx;
 
@@ -72,20 +71,21 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask trampCheckLayer;
     public LayerMask groundCheck;
+    public LayerMask dashMask;
     RaycastHit rHit;
+    RaycastHit dashCheck;
 
     private float floatTimer;
     private float floatForce;
     private float cloudGravity;
 
     bool dJumpKeyUp = true;
-
+    bool usedDoubleJump = false;
     void Start()
     {
         cloudGravity = Physics.gravity.y / 20;
         floatForce = 0.5f;
         floatTimer = 3;
-        extraJumpCounter = 1;
         playerSpeed = 5.0f;
         jumpForce = 5.0f;
         rb = GetComponent<Rigidbody>();
@@ -146,35 +146,41 @@ public class PlayerMovement : MonoBehaviour
         //code that determines if the player has double jumped
         if (IsGrounded())//if the player is touching the ground replenish his double jump
         {
-            extraJumpCounter = 1;
+            usedDoubleJump = false;
             floatTimer = 3;   
         }
 
-      
-
         if (PlayerState.currentPlayerState == PlayerMatterState.ICE || PlayerState.currentPlayerState == PlayerMatterState.DROP)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && extraJumpCounter > 0 && dJumpKeyUp)//allow the player to jump as long as they are pressing space and they have extra jumps
+            if (Input.GetKeyDown(KeyCode.Space)  && dJumpKeyUp)//allow the player to jump as long as they are pressing space and they have extra jumps
             {
-                dJumpKeyUp = false;
-                StartCoroutine(JumpParticle()); //Play Particle effect
-                extraJumpCounter--;
+                //If we are on the ground or aren't and havent used a double jump
+                if(IsGrounded() || (!IsGrounded() &&!usedDoubleJump))
+                {
+                    if(!IsGrounded())
+                    {
+                        usedDoubleJump = true;
+                    }
+                    dJumpKeyUp = false;
+                    StartCoroutine(JumpParticle()); //Play Particle effect
 
-                float momentumY = Mathf.Abs(rb.mass * rb.velocity.y);
-                //this calculates the momentum (Momentum = Max * Velocity) 
-                //The Force of Momentum is (Force of Momentum = Momentum/Deltatime) 
-                //Force is instantous so time isnt a factor so Force of Momentum
-                //So Force Of Momentum = Momentum;
-                if (IsFalling())//canceling out the Force of Momentum for Video Game Double Jumping When Falling
-                {
-                    float tempForce = jumpForce + momentumY;
-                    rb.AddForce(new Vector3(0, tempForce, 0), ForceMode.Impulse);
+                    float momentumY = Mathf.Abs(rb.mass * rb.velocity.y);
+                    //this calculates the momentum (Momentum = Max * Velocity) 
+                    //The Force of Momentum is (Force of Momentum = Momentum/Deltatime) 
+                    //Force is instantous so time isnt a factor so Force of Momentum
+                    //So Force Of Momentum = Momentum;
+                    if (IsFalling())//canceling out the Force of Momentum for Video Game Double Jumping When Falling
+                    {
+                        float tempForce = jumpForce + momentumY;
+                        rb.AddForce(new Vector3(0, tempForce, 0), ForceMode.Impulse);
+                    }
+                    else//Other Wise Jump Normally
+                    {
+                        rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                        sfx.PlaySound("jump");
+                    }
                 }
-                else//Other Wise Jump Normally
-                {
-                    rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-                    sfx.PlaySound("jump");
-                }
+               
             }
             else if(Input.GetKeyUp(KeyCode.Space))
             {
@@ -207,13 +213,21 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (isDashing)
+                if (isDashing && canDash)
                 {
                     dashTimeElapsed += Time.deltaTime;
 
                     if (dashTimeElapsed <= dashTime)
                     {
-                        additionForce += visObject.transform.forward * 100f;
+                        //Check to see if we will collide with anything
+                        Physics.Raycast(transform.position, visObject.transform.forward, out dashCheck, 5f, dashMask);
+
+                        float dist = Vector3.Distance(transform.position, dashCheck.point) -1f;
+
+                        dist = Mathf.Clamp(dist, 0.0f, 5f);
+
+                        //Probably not the best way to do this but oh well
+                        transform.position += visObject.transform.forward * dist;
                     }
                     else
                     {
