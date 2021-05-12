@@ -23,8 +23,6 @@ public class PlayerCollector : MonoBehaviour
     public Image orangeLock;
     public Image melonLock;
     public Image strawLock;
-
-
     void Start()
     {
         cherryLock.gameObject.SetActive(true);
