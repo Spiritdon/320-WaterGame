@@ -11,7 +11,6 @@ public class MaterialControl : MonoBehaviour
     public Renderer dropletRender;
     public Renderer iceRender;
     public Renderer cloudRender;
-    public PlayerCollector playerCollector;
     private string currentColor;
     List<int> colors;
     Dictionary<string, bool> collectedFla;
@@ -80,180 +79,112 @@ public class MaterialControl : MonoBehaviour
         currentColor = "Water";
     }
 
-    public void swapRight(string currentFlavor)
+    public void swapRight()
     {
+
+        switch (currentColor)
+        {
+            case "Water":
+                if (flavorBool[0] == true)
+                {
+                    grapeClicked();
+                }
+                break;
+
+            case "Grape":
+                if (flavorBool[2] == true)
+                {
+                    lemonClicked();
+                }
+                break;
+
+            case "Lemon":
+                if (flavorBool[5] == true)
+                {
+                    strawBerryClicked();
+                }
+                break;
+
+            case "Strawberry":
+                if (flavorBool[3] == true)
+                {
+                    orangeClicked();
+                }
+                break;
+
+            case "Orange":
+                if (flavorBool[4] == true)
+                {
+                    waterMelonClicked();
+                }
+                break;
+
+            case "Watermelon":
+                if (flavorBool[1] == true)
+                {
+                    cherryClicked();
+                }
+                break;
+
+            case "Cherry":
+                waterClicked();
+                break;
+        }
         
-        bool oneChosen = false;
-        if (currentColor == "Water")
-        {
-            if (flavorBool[0] == true)
-            {
-                this.grapeClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Grape";
-            }
-        }
-        if (currentColor == "Grape" && !oneChosen)
-        {
-            if (flavorBool[2] == true)
-            {
-                this.lemonClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Lemon";
-            }
-        }
-        if (currentColor == "Lemon" && !oneChosen)
-        {
-            if (flavorBool[5] == true)
-            {
-                this.strawBerryClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Strawberry";
-            }
-        }
-        if (currentColor == "Strawberry" && !oneChosen)
-        {
-            if (flavorBool[3] == true)
-            {
-                this.orangeClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Orange";
-            }
-        }
-        if (currentColor == "Orange" && !oneChosen)
-        {
-            if (flavorBool[4] == true)
-            {
-                this.waterMelonClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Watermelon";
-            }
-        }
-        if (currentColor == "Watermelon" && !oneChosen)
-        {
-            if (flavorBool[1] == true)
-            {
-                cherryClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Cherry";
-            }
-        }
-        if (currentColor == "Cherry")
-        {
-            waterClicked();
-            return;
-        }
-        print(currentColor);
     }
     public void swapLeft()
     {
-        
-        bool oneChosen = false;
+        switch (currentColor)
+        {
+            case "Cherry":
+                if (flavorBool[4] == true)
+                {
+                    waterMelonClicked();
+                }
+                break;
 
-        if (currentColor == "Water" && !oneChosen)
-        {
-            if (flavorBool[1] == true)
-            {
-                cherryClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Cherry";
-            }
+            case "Watermelon":
+                if (flavorBool[3] == true)
+                {
+                    orangeClicked();
+                }
+                break;
+
+            case "Orange":
+                if (flavorBool[5] == true)
+                {
+                    strawBerryClicked();
+                }
+                break;
+
+            case "Strawberry":
+                if (flavorBool[2] == true)
+                {
+                    lemonClicked();
+                }
+                break;
+
+            case "Lemon":
+                if (flavorBool[0] == true)
+                {
+                    grapeClicked();
+                }
+                break;
+
+            case "Grape":
+                waterClicked();
+                break;
+
+            case "Water":
+                if (flavorBool[1] == true)
+                {
+                    cherryClicked();
+                }
+                break;
+
         }
-        if (currentColor == "Cherry" && !oneChosen)
-        {
-            if (flavorBool[4] == true)
-            {
-                waterMelonClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Watermelon";
-            }
-        }
-        if (currentColor == "Watermelon" && !oneChosen)
-        {
-            if (flavorBool[3] == true)
-            {
-                orangeClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Orange";
-            }
-        }
-        if (currentColor == "Orange" && !oneChosen)
-        {
-            if (flavorBool[5] == true)
-            {
-                strawBerryClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Strawberry";
-            }
-        }
-        if (currentColor == "Strawberry" && !oneChosen)
-        {
-            if (flavorBool[2] == true)
-            {
-                lemonClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Lemon";
-            }
-        }
-        if (currentColor == "Lemon" && !oneChosen)
-        {
-            if (flavorBool[0] == true)
-            {
-                grapeClicked();
-                oneChosen = true;
-                return;
-            }
-            else
-            {
-                currentColor = "Grape";
-            }
-        }
-        
-        print(currentColor);
+
+
 
     }
 
