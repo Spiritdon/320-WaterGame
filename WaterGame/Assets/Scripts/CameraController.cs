@@ -71,16 +71,6 @@ public class CameraController : MonoBehaviour
             fallTimer -= Time.deltaTime * 900;
         }
 
-        //Temp
-        /*if (Input.GetKey(KeyCode.E))
-        {
-            transform.RotateAround(transform.position, Vector3.up, 90 * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            transform.RotateAround(transform.position, Vector3.up, -90 * Time.deltaTime);
-        }*/
-
         //Match player position
         transform.position = Vector3.Lerp(transform.position, playerObject.transform.position, Time.deltaTime * movementSpeed);
         RotateCamera();
@@ -91,21 +81,27 @@ public class CameraController : MonoBehaviour
     {
         //Prevent camera from clipping with level geometry
         Vector3 dirToCam = characterCamera.transform.position - transform.position;
+
+        //Default to max distance
+        Vector3 targetPos = transform.position + dirToCam.normalized * maxDistance;
+
         if(Physics.Raycast(transform.position,dirToCam,out camHit,maxDistance, camColMask))
         {
-            Vector3 hitPos = camHit.point;
-            hitPos -= dirToCam * 0.75f;
 
-            if(Vector3.Distance(hitPos,transform.position)> 1f)
+            if(!camHit.collider.CompareTag("FlavorCOL") && !camHit.collider.CompareTag("SugarCOL"))
             {
-                characterCamera.transform.position = Vector3.Lerp(characterCamera.transform.position, hitPos, Time.deltaTime * 20.0f);
+                Vector3 hitPos = camHit.point;
+                hitPos += dirToCam.normalized * 0.75f;
+
+                if (Vector3.Distance(hitPos, transform.position) >= 1f)
+                {
+                    targetPos = hitPos;
+                }
             }
+         
         }
-        //Keep camera at max distance
-        else
-        {
-            characterCamera.transform.position = transform.position + dirToCam.normalized * maxDistance;
-        }
+
+        characterCamera.transform.position = Vector3.Lerp(characterCamera.transform.position, targetPos, Time.deltaTime * 15.0f);
     }
     private void RotateCamera()
     {
