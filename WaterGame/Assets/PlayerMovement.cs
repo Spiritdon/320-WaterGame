@@ -68,9 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool GroundPounding { get => groundPounding;}
 
-    //Pause Menu
-    public GameObject panel;
-    bool isPanelActive;
+
 
     public LayerMask trampCheckLayer;
     public LayerMask groundCheck;
@@ -134,35 +132,8 @@ public class PlayerMovement : MonoBehaviour
 
         //rb.AddForce(velAddition, ForceMode.Acceleration);
     }
-    public void ClosePauseMenu()
-    {
-        panel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1.0f;
-    }
     void Update()
     {
-        //Pause Menu
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPanelActive = panel.activeSelf;
-            isPanelActive = !isPanelActive;
-            panel.SetActive(isPanelActive);
-            if (isPanelActive)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                Time.timeScale = 1.0f;
-            }
-        }
-       
         //print(fallTimer);
         
         //basic player movement
