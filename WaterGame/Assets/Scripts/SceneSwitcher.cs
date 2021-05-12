@@ -23,6 +23,8 @@ public class SceneSwitcher : MonoBehaviour
     }
     void Start()
     {
+
+        QualitySettings.vSyncCount = 0;
         //Load main menu on start
         LoadScene(1);
     }
