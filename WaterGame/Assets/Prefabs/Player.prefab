@@ -5122,13 +5122,15 @@ MonoBehaviour:
   runLeft: {fileID: 1899705029021513748}
   runRight: {fileID: 1559960602927402645}
   camPivot: {fileID: 0}
-  panel: {fileID: 0}
   trampCheckLayer:
     serializedVersion: 2
     m_Bits: 512
   groundCheck:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4919
+  dashMask:
+    serializedVersion: 2
+    m_Bits: 15159
 --- !u!114 &7338422855528717390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5210,7 +5212,8 @@ AudioSource:
   m_GameObject: {fileID: 4617105111562097871}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5638349404813899886, guid: bea602eb1471f1c4a98c1b974aa71414,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 6de4105e69c7cfb47877d59422d71799, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
