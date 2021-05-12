@@ -60,7 +60,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject visObject;
     public GameObject cloudVis;
     private Vector3 cloudBaseScale;
-
+    [SerializeField] ParticleSystem runLeft;
+    [SerializeField] ParticleSystem runRight;
     //Camera
     public GameObject camPivot;
 
@@ -323,6 +324,17 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("HorizSpeed", input.magnitude);
         anim.SetFloat("VertSpeed", rb.velocity.y);
 
+        //Running Particles
+        if(IsGrounded() && input.magnitude >0.0f && rb.velocity.magnitude > 0.0f)
+        {
+            runLeft.Play();
+            runRight.Play();
+        }
+        else
+        {
+            runLeft.Stop();
+            runRight.Stop();
+        }
         //Make input relative to camera view
         Vector3 finalVel = Vector3.zero;
 
