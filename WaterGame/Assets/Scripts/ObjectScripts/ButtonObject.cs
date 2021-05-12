@@ -16,6 +16,8 @@ public class ButtonObject : MonoBehaviour
     //References
     [SerializeField] GameObject buttonTop;
     [SerializeField] private TriggerEvent colTrigger;
+    [SerializeField] AudioClip soundClip;
+    [SerializeField] AudioSource audioSource;
 
     //Delegates
 
@@ -46,6 +48,7 @@ public class ButtonObject : MonoBehaviour
                     {
                         playerOnButton = true;
                         ActivateButton();
+                       
                     }
                    
                 }
@@ -58,6 +61,7 @@ public class ButtonObject : MonoBehaviour
             if(holdTime == 0)
             {
                 ReleaseButton();
+                
             }
         }
     }
@@ -67,6 +71,7 @@ public class ButtonObject : MonoBehaviour
         activated = true;
         buttonActivated?.Invoke();  //Call delegate
         buttonTop.transform.localPosition -= new Vector3(0, 0, 0.0112f);
+        audioSource.PlayOneShot(soundClip);
         if (holdTime != 0)
         {
             StartCoroutine(HoldActivated());
@@ -80,6 +85,7 @@ public class ButtonObject : MonoBehaviour
             activated = false;
             buttonReleased?.Invoke();  //Call delegate
             buttonTop.transform.localPosition += new Vector3(0, 0, 0.0112f);
+            audioSource.PlayOneShot(soundClip);
         }
       
     }
