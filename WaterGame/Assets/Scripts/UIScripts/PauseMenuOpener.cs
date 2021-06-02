@@ -12,6 +12,11 @@ public class PauseMenuOpener : MonoBehaviour
 
     [SerializeField] GameObject tutorialPanels;
 
+    private void Start()
+    {
+        isPanelActive = panel.activeSelf;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -19,6 +24,19 @@ public class PauseMenuOpener : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
+        }
+
+        if (isPanelActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1.0f;
         }
     }
 
