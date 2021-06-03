@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class PlayerCollector : MonoBehaviour
 {
     
-    public Text sugarCounter;
+    public Text menuSugarCounter;
+    public Text gameSugarCollector;
     // Start is called before the first frame update
 
     public Button cherry;
@@ -105,7 +106,8 @@ public class PlayerCollector : MonoBehaviour
             pickupAud.pitch = Random.Range(0.8f, 1.2f);
             pickupAud.Play();
             ProgressManager.Instance.sugarCollected++;
-            sugarCounter.text = ProgressManager.Instance.sugarCollected.ToString();
+            menuSugarCounter.text = ProgressManager.Instance.sugarCollected.ToString();
+            gameSugarCollector.text = ProgressManager.Instance.sugarCollected.ToString();
             Destroy(other.gameObject);
         }
     }

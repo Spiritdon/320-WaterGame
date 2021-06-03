@@ -8,6 +8,8 @@ public class PauseMenuOpener : MonoBehaviour
     //Pause Menu
     public GameObject panel;
     bool isPanelActive;
+    
+    [SerializeField] GameObject gameUIPanel;
 
 
     [SerializeField] GameObject tutorialPanels;
@@ -49,6 +51,10 @@ public class PauseMenuOpener : MonoBehaviour
         if (tutorialPanels != null)
         {
             tutorialPanels.SetActive(!isPanelActive);
+        }
+        if (gameUIPanel != null)
+        {
+            gameUIPanel.SetActive(!isPanelActive);
         }
 
         panel.SetActive(isPanelActive);
